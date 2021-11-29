@@ -1,3 +1,5 @@
+Below scripts works using R 3.4 and python 3.7.4. 
+
 # scRNA-seq
 ## Extraction of sequencing output data
 
