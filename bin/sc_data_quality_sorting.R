@@ -1,6 +1,7 @@
 # Sandra Lilja
+# R version 3.4
 
-library(Seurat)
+library(Seurat) # v2.3.4
 library(dplyr)
 library(Matrix)
 library(R.utils)
