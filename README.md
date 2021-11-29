@@ -7,6 +7,16 @@ Below scripts works using R 3.4 and python 3.7.4.
 2. getDgem.sh # Create digital gene expression matrix and fastqc analysis
 3. getdepth.sh # Check read depth
 
+Run examples:
+getSeq_3samples [path/input_file] [path_to_GenomeDir] [path/primary_assembly.genome.fa] [path/primary_assembly.annotation.gtf] 20000
+where 20000 is the double number of cells expected to be extracted from analysis.
+
+getDgem [path/output_directory] [path_input_data] [input_file] [output_file]
+where the input path and file are the output from getSeq_3samples. 
+
+getdepth [path/output_directory] [path_input_data] [input_file] [output_file]
+where the input path and file are the output from getSeq_3samples. 
+
 ## Quality assesment and full matrix construction
 
 1. sc_data_quality_sorting.R # Check the quality of the data and remove outliers
