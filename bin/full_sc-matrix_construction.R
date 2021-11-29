@@ -1,6 +1,6 @@
 # Sandra Lilja
 
-library(Seurat)
+library(Seurat) # v2.3.4
 library(dplyr)
 library(Matrix)
 library(plyr)
