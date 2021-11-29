@@ -34,13 +34,9 @@ vv <- X.seu@meta.data$nGene/X.seu@meta.data$nUMI
 plot(density(vv))
 
 ### Sort the data based on results from previous graph
-if (tissue == 'HA'){
-  print(tissue)
-  X.seu <- FilterCells(X.seu, subset.names = 'nUMI',
-                       high.thresholds = 15000)
-}else {
-  print('tissue not defined')
-}
+print(tissue)
+X.seu <- FilterCells(X.seu, subset.names = 'nUMI',
+                     high.thresholds = 16000)
 X.seu@data[1:5,1:5]
 
 ### Extract expression matrix
