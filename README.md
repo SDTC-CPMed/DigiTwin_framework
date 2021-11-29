@@ -19,8 +19,12 @@ where the input path and file are the output from getSeq_3samples.
 
 ## Quality assesment and full matrix construction
 
-1. sc_data_quality_sorting.R # Check the quality of the data and remove outliers
-2. full_sc-matrix_construction.R # Combine the matrices from all samples and set specific quality cut-offs
+To ensure good quality data for downstream analyses, it is recommended to remove poor quality cells from the analyses. Here, we define and keep the good quality cells as those having a minimum of 400 transcripts, 200 genes, and less than 20% mitochondrial genes. Due to the risk of duplicates in the library resulting in two or more cells sharing a cell barcode, it is also recommend to remove outliers, which can be based on empirical evaluation of the distributionan overestimation of transcripts count over the cells. 
+
+First, we combined the output files from getDgem into a matrix using full_sc-matrix_construction.R, whereafter we check the quality using sc_data_quality_sorting.R. 
+
+1. full_sc-matrix_construction.R # Combine the matrices from all samples and set specific quality cut-offs
+2. sc_data_quality_sorting.R # Check the quality of the data and remove outliers
 
 ## Cell type analysis
 
