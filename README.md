@@ -46,7 +46,7 @@ Monocle_v3_RAdata.r is run to calculate differentially expressed genes (DEGs) be
 
 To calculate the fold changes (FCs) for the DEGs, we run sc_FC_zero-infl-neg-bionmial.R. This will compute FCs between allergen challenged vs non-challenged, meaning that a positive FC indicates a higher mean expression in the allergen challenged group. Some modifications to the code are needed to compute the FCs between any other pair of groups.
 
-To plot the distrinbution of DEGs over different time points and cell types, as well as the number of cell types over different time points and treatments, we run plot_DEGs.R. 
+To plot the distrinbution of DEGs over different time points and cell types, as well as the number of cell types over different time points and treatment groups, we run plot_DEGs.R. 
 
 1. pre-DEG_analysis.R # statistics and preparation of input files for DEG analysis  
 2. Monocle_v3_RAdata.r # Calculate DEGs
