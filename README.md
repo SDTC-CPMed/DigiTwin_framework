@@ -6,16 +6,17 @@ Below scripts works using R 3.4 and python 3.7.4.
 1. getSeq_3samples.sh # Data extraction
 2. getDgem.sh # Create digital gene expression matrix and fastqc analysis
 3. getdepth.sh # Check read depth
+4. example_data_extraction.sh # example script to run above scripts
 
 Run examples:  
 getSeq_3samples [path/input_file] [path_to_GenomeDir] [path/primary_assembly.genome.fa] [path/primary_assembly.annotation.gtf] 20000  
 where 20000 is the double number of cells expected to be extracted from analysis.
 
-getDgem [path/output_directory] [path_input_data] [input_file] [output_file]  
-where the input path and file are the output from getSeq_3samples. 
+getDgem [path/output_directory] [path_input_data] [run_ID] [sample_ID]  
+getdepth [path/output_directory] [path_input_data] [run_ID] [sample_ID]  
+where sample_ID has to be the same as output sample name from getSeq_3samples
 
-getdepth [path/output_directory] [path_input_data] [input_file] [output_file]  
-where the input path and file are the output from getSeq_3samples. 
+See example_data_extraction.sh for an example on how to extract data from one sequencing run. 
 
 ## Quality assesment and full matrix construction
 
