@@ -40,7 +40,15 @@ RCA_cellType_identification.R is then run to map the cells towards the newly cre
 
 ## Differnetial expression analysis 
 
+To prepare the data from cell type analysis for differential expression analysis, we run pre-DEG_analysis.R. This script will ensure that the input to Monocle_v3_RAdata.r is is the correct format. It will also compute some basic statistics, such as the number of cells per sample (cell type, time point, etc). 
+
+Monocle_v3_RAdata.r is run to calculate differentially expressed genes (DEGs) between allergen challenged and non-challenged samples. Some modifications to the code are needed to compute DEGs between any other pair of groups.
+
+To calculate the fold changes (FCs) for the DEGs, we run sc_FC_zero-infl-neg-bionmial.R. This will compute FCs between allergen challenged vs non-challenged, meaning that a positive FC indicates a higher mean expression in the allergen challenged group. Some modifications to the code are needed to compute the FCs between any other pair of groups.
+
+To plot the distrinbution of DEGs over different time points and cell types, as well as the number of cell types over different time points and treatments, we run plot_DEGs.R. 
+
 1. pre-DEG_analysis.R # statistics and preparation of input files for DEG analysis  
 2. Monocle_v3_RAdata.r # Calculate DEGs
-3. sc_FC_zero-infl-neg-bionmial.R # Fold change calculations
+3. sc_FC_zero-infl-neg-bionmial.R # FC calculations
 4. plot_DEGs.R # Plot the distribution of DEGs
