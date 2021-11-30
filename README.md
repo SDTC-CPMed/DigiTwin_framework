@@ -31,7 +31,9 @@ First, we combined the output files from getDgem into a matrix using full_sc-mat
 
 ## Cell type analysis
 
-The references for cell type identification were created by RCA_reference_construction.R in R 3.4, and added to the RCA sysdata file installed. 
+The references for cell type identification were created by RCA_reference_construction.R in R 3.4, and added to the RCA sysdata file installed. Input to this scripts are the normalized matrix output from microarray analyses based on which the references should be constructed.   
+
+RCA_cellType_identification.R is then run to map the cells towards the newly created references. As this script is based on some modifications to the Reference Component Analysis (RCA, Li et al., 2017 https://pubmed.ncbi.nlm.nih.gov/28319088/) with calculations of p-values and newly created references, the modified codes need to be added as well (as part of the script). These modified codes you can find in /RNA_mod/. As input matrix to this code we used the knn-smoothed data (output using script from Wagner et al., 2018 https://www.biorxiv.org/content/early/2018/04/09/217737), but any UMI-based expression matrix should work equally.  
 
 1. RCA_reference_construction.R # Build references for cell type identification
 2. RCA_cellType_identification.R # Cell type identification using reference component analysis
