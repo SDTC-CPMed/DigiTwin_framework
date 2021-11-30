@@ -1,4 +1,5 @@
 Below scripts works using R 3.4 and python 3.7.4. 
+Note that the R scripts are not developed to be executed from command line. We recommend using RStudio for running these scripts. Modifications to these codes may be needed, to set input file directories, sample names, and other project specific information.  
 
 # scRNA-seq
 ## Extraction of sequencing output data
