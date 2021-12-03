@@ -55,10 +55,8 @@ We plot the distrinbution of DEGs over different time points and cell types, as 
 3. sc_FC_zero-infl-neg-bionmial.R # FC calculations
 4. plot_DEGs.R # Plot the distribution of DEGs
 
-![lognDEGs_over_time](https://user-images.githubusercontent.com/51739216/144604687-54ee4a7c-b661-4ec7-927b-49d54efe2883.png)
+![lognDEGs_over_time](https://user-images.githubusercontent.com/51739216/144604687-54ee4a7c-b661-4ec7-927b-49d54efe2883.png)  
+Fig 1. log(number of DEGs) identified between allergen-stimulated and diluent-stimulated cells, for each cell type at the different time points.  
 
-Fig 1. 
-
-![celltype_ratios_over_groups](https://user-images.githubusercontent.com/51739216/144604759-9677b860-46a9-4296-876b-eb5de3b69b1a.png)
-
-Fig 2. 
+![celltype_ratios_over_groups](https://user-images.githubusercontent.com/51739216/144604759-9677b860-46a9-4296-876b-eb5de3b69b1a.png)  
+Fig 2. Cell type proportions in different groups of allergen-stimulated (A) and diluent-stimulated (D), as well as unstimulated control (C), samples from healthy individuals at the different time points.  
