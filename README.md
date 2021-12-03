@@ -54,3 +54,5 @@ We plot the distrinbution of DEGs over different time points and cell types, as 
 2. Monocle_v3_RAdata.r # Calculate DEGs
 3. sc_FC_zero-infl-neg-bionmial.R # FC calculations
 4. plot_DEGs.R # Plot the distribution of DEGs
+
+![lognDEGs_over_time](https://user-images.githubusercontent.com/51739216/144604687-54ee4a7c-b661-4ec7-927b-49d54efe2883.png)
