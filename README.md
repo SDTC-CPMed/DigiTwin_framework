@@ -11,12 +11,12 @@ Note that the R scripts are not developed to be executed from command line. We r
 4. example_data_extraction.sh # example script to run above scripts
 
 Run examples:  
-getSeq_3samples [path/input] [path_to_GenomeDir] [path/primary_assembly.genome.fa] [path/primary_assembly.annotation.gtf] 20000 
+>getSeq_3samples [path/input] [path_to_GenomeDir] [path/primary_assembly.genome.fa] [path/primary_assembly.annotation.gtf] 20000 
 
 where 20000 is the double number of cells expected to be extracted from analysis. The input to this script is the single cell sequencer output folder, which should contain a SampleSheet.csv file (see example_data/SampleSheet.csv) contaning the information about the run. The genome files are the ones created for STAR alignment. The output will be written to data/{user}/getSeq, so make sure to create this directory before running the extraction scripts. 
 
-getDgem [path/project_directory] /data/{user}/getSeq [run_ID] [sample_ID]  
-getdepth [path/project_directory] /data/{user}/getSeq [run_ID] [sample_ID]  
+>getDgem [path/project_directory] /data/{user}/getSeq [run_ID] [sample_ID]  
+>getdepth [path/project_directory] /data/{user}/getSeq [run_ID] [sample_ID]  
 
 where sample_ID has to be the same as output sample name from getSeq_3samples. Sub-directories will be created in the project_directory for each run_ID and sample_ID, where the output files will be added. 
 
