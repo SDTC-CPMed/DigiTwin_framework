@@ -1,14 +1,17 @@
 # Sandra Lilja
 
+#library(remotes)
+#install_github("prabhakarlab/RCA")
+
+
 #######################
 ### GlobalPanel PBMC data ###
 library(preprocessCore)
 library(dplyr)
 library(AnnotationDbi)
 library("hgu133a.db")
-rm(list=ls())
 # Why 
-expr = read.table('/data/sanli71/RCA_reference_playaround/GlobalPanel_RAW_data/U133AGNF1B.gcrma.csv', header = T, row.names = 1, sep = ',')
+expr = read.table('data/U133AGNF1B.gcrma.csv', header = T, row.names = 1, sep = ',')
 expr[1:5,1:5]
 expr[,length(colnames(expr))+1] <- rownames(expr)
 genes <- select(hgu133a.db, expr[,177], c("ENTREZID"))
@@ -62,19 +65,21 @@ colSums(FCs>=co)
 IN = rowSums(FCs>=co)!=0 
 sum(IN)
 Tcellref = log10(XX[IN,])
-write.csv(Tcellref, '/data/sanli71/SAR_allergen_challenge_timeseries/SAR_healty_control_study/RCA_out_210211/RCA_references/GlobalPanel_MonvsDCvsBvsTNK.csv')
+#write.csv(Tcellref, 'data/RCA_references/GlobalPanel_MonvsDCvsBvsTNK.csv')
 ### Saving a new reference to RCA sysdata
+Tcellref = read.csv('/data/sharedData/SAR_allergen_challenge_timeseries/RCA_references/GlobalPanel_MonvsDCvsBvsTNK.csv',
+                           row.names = 1)
+
 data(sysdata, package='RCA')
 sysdata = sysdata[!(names(sysdata) %in% c('GlobalPanel_MonvsDCvsBvsTNK'))]
 sysdata = append(sysdata,
                  list('GlobalPanel_MonvsDCvsBvsTNK'=Tcellref))
-save(sysdata, file="/home/sanli71/R/x86_64-pc-linux-gnu-library/3.4/RCA/data/sysdata.rda")
+save(sysdata, file = paste(.libPaths()[1],"/RCA/data/sysdata.rda", sep = ''))
 names(sysdata)
 
 
 ### Huans PBMC data ###
-rm(list=ls())
-expr = read.csv('/data/sanli71/RCA_reference_playaround/PBMC_Huan_RAW_data/pbmc_huan_samples/normalized/normalized_matrix_by_entrez-id_with_sample-names.tsv', header = T, row.names = 1, sep = '\t')
+expr = read.csv('data/normalized_matrix_by_entrez-id_with_sample-names.tsv', header = T, row.names = 1, sep = '\t')
 expr <- 2^expr # remove log2 transformation from the normalized data
 expr <- expr[,-grep('PBMC', colnames(expr))]
 # genes = rownames(expr)
@@ -94,13 +99,16 @@ colSums(FCs>=co)
 IN = rowSums(FCs>=co)!=0 
 sum(IN)
 Tcellref = log10(XX[IN,])
-write.csv(Tcellref, '/data/sanli71/SAR_allergen_challenge_timeseries/SAR_healty_control_study/RCA_out_210211/RCA_references/CellRef_Huan_PBMC_CD4vsCD8vsNK.csv')
+write.csv(Tcellref, 'data/RCA_references/CellRef_Huan_PBMC_CD4vsCD8vsNK.csv')
 ### Saving a new reference to RCA sysdata
+
+
+
 data(sysdata, package='RCA')
 sysdata = sysdata[!(names(sysdata) %in% c('CellRef_Huan_PBMC_CD4vsCD8vsNK'))]
 sysdata = append(sysdata,
                  list('CellRef_Huan_PBMC_CD4vsCD8vsNK'=Tcellref))
-save(sysdata, file="/home/sanli71/R/x86_64-pc-linux-gnu-library/3.4/RCA/data/sysdata.rda")
+save(sysdata, file=paste(.libPaths()[1],"/RCA/data/sysdata.rda", sep = ''))
 names(sysdata)
 
 ## NT vs Th1 vs Th2 vs Th17 vs Treg
@@ -120,12 +128,13 @@ colSums(FCs>=co)
 IN = rowSums(FCs>=co)!=0 
 sum(IN)
 Tcellref = log10(XX[IN,])
-write.csv(Tcellref, '/data/sanli71/SAR_allergen_challenge_timeseries/SAR_healty_control_study/RCA_out_210211/RCA_references/CellRef_Huan_PBMC_CD4subsets.csv')
+write.csv(Tcellref, 'data/CellRef_Huan_PBMC_CD4subsets.csv')
 ### Saving a new reference to RCA sysdata
+
 data(sysdata, package='RCA')
 sysdata = sysdata[!(names(sysdata) %in% c('CellRef_Huan_PBMC_CD4subsets'))]
 sysdata = append(sysdata,
                  list('CellRef_Huan_PBMC_CD4subsets'=Tcellref))
-save(sysdata, file="/home/sanli71/R/x86_64-pc-linux-gnu-library/3.4/RCA/data/sysdata.rda")
+save(sysdata, file=paste(.libPaths()[1],"/RCA/data/sysdata.rda", sep = ''))
 names(sysdata)
 
