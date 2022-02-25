@@ -8,8 +8,15 @@ stop_quietly <- function() {
 }
 
 if (args[1]=='--help') {
-  print('singleR.R <full path to ipa-input main directory (i.e., containing subdirectories and data from all samples to be compared)> <full output path>')
-  print('Built on R version 4.1.2')
+  cat('singleR.R <full path to ipa-input main directory> <full output path>\n')
+  cat('Input ipa directory:
+      Should contain subdirectories, one for each time point to be included (time point need to be in subdirectory name). 
+      Ensure that the directory  only contains files included in this analysis, or error will occur when listing files.
+      Ensure the names of files follows the system <[cellType]_[timePoint]_[other description].xls>
+      Ensure that the cell types are named equally between the different time points\n')
+  cat('Output directory: Will be created if it does not exist.
+      Note that output which already exists will be overwritten\n')
+  cat('Built on R version 4.1.2\n')
   stop_quietly()
 }
 
@@ -24,10 +31,10 @@ library(dplyr)
 library(pheatmap)
 
 # dir.home <- getwd()
-# dir.data <- paste(dir.home, '/ipa_output', sep = '')
-# dir.out <- paste(dir.home, '/output', sep = '')
+# dir.data <- paste(dir.home, '/example_data/IPA_UR-prediction', sep = '')
+# dir.out <- paste(dir.home, '/output/test', sep = '')
 dir.data <- args[1]
-dir.out <- args[3]
+dir.out <- args[2]
 
 if (dir.exists(dir.out)==FALSE){
   dir.create(dir.out, recursive = T)
@@ -44,8 +51,7 @@ ipa_columns <- c("Upstream Regulator", "Molecule Type",
 # Rank the URs based on in how many cell types and at how many time points they were predicted in
 
 # read in the ipa output files
-ipa_files <- list.files(dir.data, recursive = T, pattern = '^[^UR_]', full.names = T)
-ipa_files <- ipa_files[-grep('manually_processed', ipa_files)]
+ipa_files <- list.files(dir.data, recursive = T, full.names = T)
 
 ipa <- c()
 for (i in 1:length(ipa_files)){
@@ -72,25 +78,10 @@ for (i in 1:length(ipa_files)){
   # sort the data only to include URs of interest
   ipa[[i]] <- ipa[[i]][which(ipa[[i]]$`Molecule Type` %in% molecule_types),]
 }
-celltypes <- sapply(strsplit(ipa_files, '/'), '[[', 9)
+celltypes <- sapply(strsplit(ipa_files, '/'), tail, 1)
 celltypes <- gsub(' ', '', celltypes)
 time_points <- sapply(strsplit(celltypes, '_'), '[[', 2)
 celltypes <- sapply(strsplit(celltypes, '_'), '[[', 1)
-celltypes <- gsub('monocytes', 'Monocytes', celltypes)
-celltypes <- gsub('th1', 'Th1', celltypes)
-celltypes <- gsub('Bcells', 'Bcell', celltypes)
-celltypes <- gsub('Th1cell', 'Th1', celltypes)
-celltypes <- gsub('Th17cell', 'Th17', celltypes)
-celltypes <- gsub('Th2cell', 'Th2', celltypes)
-celltypes <- gsub('CD8cell', 'CD8', celltypes)
-celltypes <- gsub('Tregcell', 'Treg', celltypes)
-celltypes <- gsub('Monocytescell', 'Monocytes', celltypes)
-celltypes <- gsub('Dendriticcell', 'Dendritic', celltypes)
-celltypes <- gsub('NKcell', 'NK', celltypes)
-celltypes <- gsub('NTcell', 'NT', celltypes)
-celltypes <- gsub('Bcell', 'Bcells', celltypes)
-unique(sort(celltypes))
-
 names(ipa) <- paste(celltypes, time_points, sep = '_')
 
 
@@ -116,12 +107,13 @@ for (i in 1:length(UR_rank$UR)){
 }
 UR_rank <- UR_rank[order(UR_rank$`N cell types and time points`, decreasing = T),]
 
+print('write ranked list to out')
 write.csv(ipa_comb, paste(dir.out, '/combined_UR_regulations.csv', sep = ''), row.names = F)
 write.csv(UR_rank, paste(dir.out, '/UR_ranking.csv', sep = ''), row.names = F)
 
 
-
 # Make a heatmap of the z-scores for each UR in each cell type at each time point
+print('Create heatmap of ranked URs z-scores')
 zscores <- matrix(NA, ncol = length(ipa), nrow = length(URs))
 colnames(zscores) <- names(ipa)
 rownames(zscores) <- UR_rank$UR
@@ -161,6 +153,7 @@ ph <- pheatmap(zscores, color = my_palette, breaks = bk,
          cluster_rows = F,
          cellwidth = 4)
 
+print('Save heatmap to output')
 pdf(paste(dir.out, '/UR_ranking_heatmap.pdf', sep = ''), height = 13, width = 8)
 print(ph)
 dev.off()
