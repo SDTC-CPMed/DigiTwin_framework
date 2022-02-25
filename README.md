@@ -42,9 +42,10 @@ Fig 1. log(number of DEGs) identified between allergen-stimulated and diluent-st
 <img src="https://user-images.githubusercontent.com/51739216/144604759-9677b860-46a9-4296-876b-eb5de3b69b1a.png" width="500" />  
 Fig 2. Cell type proportions in different groups of allergen-stimulated (A) and diluent-stimulated (D), as well as unstimulated control (C), samples from healthy individuals at the different time points.  
 
-## Upstream Regulatory gene prediction in Ingenuity Pathway Analysis (IPA)
+## Upstream Regulatory (UR) gene prediction in Ingenuity Pathway Analysis (IPA)
 
-Steps for how to do the URs(upstream regulators) analysis by IPA and download the results.
+Steps for how to predict the URs by IPA and download the results.
+IPA is a commercial software, but you can request a free trial here (https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-ipa/)
 
 1. Create a new project (Example)in the Project Manager to upload the DEGs(differentially expressed genes)
 
