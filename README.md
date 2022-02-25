@@ -44,29 +44,28 @@ Fig 2. Cell type proportions in different groups of allergen-stimulated (A) and 
 
 ## Upstream Regulatory (UR) gene prediction in Ingenuity Pathway Analysis (IPA)
 
-Steps for how to predict the URs by IPA and download the results.
 IPA is a commercial software, but you can request a free trial here (https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-ipa/)
 
-1. Create a new project (Example)in the Project Manager to upload the DEGs(differentially expressed genes)
+1. Create a new project (Example) in the Project Manager to upload the DEGs (differentially expressed genes)
 <img src="https://user-images.githubusercontent.com/51739216/155742486-d36454fe-081b-4dfc-8022-789aa849a87b.png" width="300" /> 
 
-2. In the new project(Example), there’s “Dataset Files” where can upload the DEGs. ased on the data, choose the corresponding ID, for example, “Human gene symbol” or Entrez gene or. Meanwhile, upload the corresponding LogFC and q-value, and keep all of them as the same group, like observation 1.  And click “save”. And write down the name for the dataset.
+2. Upload the DEGs into “Dataset Files”, in the new project (Example). Based on the data, choose the corresponding ID, for example, “Human gene symbol” or "Entrez gene ID". Add the corresponding LogFC and q-value cut-offs, and keep all of them as the same group, e.g., observation 1.  Click “save” and name the dataset.
 <img src="https://user-images.githubusercontent.com/51739216/155743247-58c3ab2c-3c9c-41a3-85bf-b36e51239ca4.png" width="450" />
 
-3. In the lower right corner find “Analyze/ filter dataset”, then click it, you will find “Core Analysis” and click it. 
+3. In the lower right corner click “Analyze/Filter Dataset”, then “Core Analysis”. 
 <img src="https://user-images.githubusercontent.com/51739216/155743530-21a556a6-26d2-4e3c-95eb-de632dccec07.png" width="450" />
 
 4. Click ”next”
 <img src="https://user-images.githubusercontent.com/51739216/155743696-ac146033-b553-44b1-a020-9ca9e8bae46d.png" width="350" />
 
-5. Then set up “General Settings and”  based on the dataset and aim For example, “Species”, “Data Sources” and so on. Also can SetCutoffs if you need.
-6. Then In the lower right corner find “Run Analysis” and click.
+5. Based on the dataset and aim, define “General Settings”, “Species”, “Data Sources”, etc. Define cut-offs at "SetCutoffs".
+6. In the lower right corner, click “Run Analysis”.
 <img src="https://user-images.githubusercontent.com/51739216/155743923-9a944d12-d598-4b49-82b7-0a445c43a23c.png" width="450" />
 
-7. After running analysis, in your project, you can find “Analyses”, check the result and click it.
+7. After analyses has been run, you can find them in your project under “Analyses”. Choose your analysis to check the results.
 <img src="https://user-images.githubusercontent.com/51739216/155744209-01ac7e35-4ed6-4325-9061-b284f00b71b7.png" width="300" />
 
-8. Find and click the “Upstream Analysis” in the top tab tools to show your results, then you can download the result by clicking <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />
+8. Choose “Upstream Analysis” in the top tab tools to show your results. You can download the result by clicking <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />
 <img src="https://user-images.githubusercontent.com/51739216/155744562-c6748942-bb6f-4fb7-b602-1b0be72e8aaf.png" width="450" />
 
 
