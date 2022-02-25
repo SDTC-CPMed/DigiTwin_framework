@@ -51,23 +51,23 @@ IPA is a commercial software, but you can request a free trial here (https://dig
 <img src="https://user-images.githubusercontent.com/51739216/155742486-d36454fe-081b-4dfc-8022-789aa849a87b.png" width="300" /> 
 
 2. In the new project(Example), there’s “Dataset Files” where can upload the DEGs. ased on the data, choose the corresponding ID, for example, “Human gene symbol” or Entrez gene or. Meanwhile, upload the corresponding LogFC and q-value, and keep all of them as the same group, like observation 1.  And click “save”. And write down the name for the dataset.
-<img src="https://user-images.githubusercontent.com/51739216/155743247-58c3ab2c-3c9c-41a3-85bf-b36e51239ca4.png" width="400" />
+<img src="https://user-images.githubusercontent.com/51739216/155743247-58c3ab2c-3c9c-41a3-85bf-b36e51239ca4.png" width="450" />
 
 3. In the lower right corner find “Analyze/ filter dataset”, then click it, you will find “Core Analysis” and click it. 
-<img src="https://user-images.githubusercontent.com/51739216/155743530-21a556a6-26d2-4e3c-95eb-de632dccec07.png" width="400" />
+<img src="https://user-images.githubusercontent.com/51739216/155743530-21a556a6-26d2-4e3c-95eb-de632dccec07.png" width="450" />
 
 4. Click ”next”
 <img src="https://user-images.githubusercontent.com/51739216/155743696-ac146033-b553-44b1-a020-9ca9e8bae46d.png" width="400" />
 
 5. Then set up “General Settings and”  based on the dataset and aim For example, “Species”, “Data Sources” and so on. Also can SetCutoffs if you need.
 6. Then In the lower right corner find “Run Analysis” and click.
-<img src="https://user-images.githubusercontent.com/51739216/155743923-9a944d12-d598-4b49-82b7-0a445c43a23c.png" width="400" />
+<img src="https://user-images.githubusercontent.com/51739216/155743923-9a944d12-d598-4b49-82b7-0a445c43a23c.png" width="450" />
 
 7. After running analysis, in your project, you can find “Analyses”, check the result and click it.
 <img src="https://user-images.githubusercontent.com/51739216/155744209-01ac7e35-4ed6-4325-9061-b284f00b71b7.png" width="300" />
 
 8. Find and click the “Upstream Analysis” in the top tab tools to show your results, then you can download the result by clicking <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />
-<img src="https://user-images.githubusercontent.com/51739216/155744562-c6748942-bb6f-4fb7-b602-1b0be72e8aaf.png" width="400" />
+<img src="https://user-images.githubusercontent.com/51739216/155744562-c6748942-bb6f-4fb7-b602-1b0be72e8aaf.png" width="450" />
 
 
 
