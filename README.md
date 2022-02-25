@@ -47,6 +47,7 @@ Fig 2. Cell type proportions in different groups of allergen-stimulated (A) and 
 Steps for how to do the URs(upstream regulators) analysis by IPA and download the results.
 
 1. Create a new project (Example)in the Project Manager to upload the DEGs(differentially expressed genes)
+
 2. In the new project(Example), there’s “Dataset Files” where can upload the DEGs. ased on the data, choose the corresponding ID, for example, “Human gene symbol” or Entrez gene or. Meanwhile, upload the corresponding LogFC and q-value, and keep all of them as the same group, like observation 1.  And click “save”. And write down the name for the dataset.
 3. In the lower right corner find “Analyze/ filter dataset”, then click it, you will find “Core Analysis” and click it. 
 4. Click ”next”
