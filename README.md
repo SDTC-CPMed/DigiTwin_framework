@@ -3,25 +3,6 @@ Below scripts works using R 3.4 and python 3.7.4.
 Note that the R scripts are not developed to be executed from command line. We recommend using RStudio for running these scripts. Modifications to these codes may be needed, to set input file directories, sample names, and other project specific information.  
 
 # scRNA-seq
-## Extraction of sequencing output data
-
-1. getSeq_3samples.sh # Data extraction
-2. getDgem.sh # Create digital gene expression matrix and fastqc analysis
-3. getdepth.sh # Check read depth
-4. example_data_extraction.sh # example script to run above scripts
-
-Run examples:  
->getSeq_3samples [path/input] [path_to_GenomeDir] [path/primary_assembly.genome.fa] [path/primary_assembly.annotation.gtf] 20000 
-
-where 20000 is the double number of cells expected to be extracted from analysis. The input to this script is the single cell sequencer output folder, which should contain a SampleSheet.csv file (see example_data/SampleSheet.csv) contaning the information about the run. The genome files are the ones created for STAR alignment. The output will be written to data/{user}/getSeq, so make sure to create this directory before running the extraction scripts. 
-
->getDgem [path/project_directory] /data/{user}/getSeq [run_ID] [sample_ID]  
->getdepth [path/project_directory] /data/{user}/getSeq [run_ID] [sample_ID]  
-
-where sample_ID has to be the same as output sample name from getSeq_3samples. Sub-directories will be created in the project_directory for each run_ID and sample_ID, where the output files will be added. 
-
-See example_data_extraction.sh for an example on how to extract data from one sequencing run. 
-
 ## Quality assesment and full matrix construction
 
 To ensure good quality data for downstream analyses, it is recommended to remove poor quality cells from the analyses. Here, we define and keep the good quality cells as those having a minimum of 400 transcripts, 200 genes, and less than 20% mitochondrial genes. Due to the risk of duplicates in the library resulting in two or more cells sharing a cell barcode, it is also recommend to remove outliers, which can be based on empirical evaluation of the distributionan overestimation of transcripts count over the cells. 
