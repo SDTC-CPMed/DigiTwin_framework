@@ -13,12 +13,12 @@ stop_quietly <- function() {
 if (args[1]=='--help') {
   cat('singleR.R <full path to ipa-input directory> <full path to deg-input directory> <full output path>\n')
   cat('Input ipa directory:
-        Should contain subdirectories, one for each time point (time point need to be in subdirectory name). 
-        Ensure that the directory  only contains files included in this analysis, or error will occur when listing files.
-        Ensure the names of files follows the system <[cellType]_[timePoint]_[other description].xls>\n')
+      Should contain subdirectories, one for each time point (time point need to be in subdirectory name). 
+      Ensure that the directory  only contains files included in this analysis, or error will occur when listing files.
+      Ensure the names of files follows the system <[cellType]_[timePoint]_[other description].xls>\n')
   cat('Input deg directory:
-        Ensure time points and cell type are named equally as in the ipa data file names.
-        The files should be named <degs_monocle_HA_vs_HC_[CellType]_[timePoint].txt> (Note, CellType in 6th position sep="_")\n')
+      Ensure time points and cell type are named equally as in the ipa data file names.
+      The files should be named <degs_monocle_HA_vs_HC_[CellType]_[timePoint].txt> (Note, CellType in 6th position sep="_")\n')
   cat('Output directory: Will be created if it does not exist.
       If output files already exists, a number will be added to its name to prevent overwriting\n')
   cat('optional parameters;\n')
