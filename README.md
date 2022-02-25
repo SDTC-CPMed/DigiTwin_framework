@@ -57,7 +57,7 @@ IPA is a commercial software, but you can request a free trial here (https://dig
 <img src="https://user-images.githubusercontent.com/51739216/155743530-21a556a6-26d2-4e3c-95eb-de632dccec07.png" width="450" />
 
 4. Click ”next”
-<img src="https://user-images.githubusercontent.com/51739216/155743696-ac146033-b553-44b1-a020-9ca9e8bae46d.png" width="400" />
+<img src="https://user-images.githubusercontent.com/51739216/155743696-ac146033-b553-44b1-a020-9ca9e8bae46d.png" width="350" />
 
 5. Then set up “General Settings and”  based on the dataset and aim For example, “Species”, “Data Sources” and so on. Also can SetCutoffs if you need.
 6. Then In the lower right corner find “Run Analysis” and click.
