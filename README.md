@@ -2,7 +2,7 @@ Below scripts works using R 3.4 and python 3.7.4.
 
 Note that the R scripts are not developed to be executed from command line. We recommend using RStudio for running these scripts. Modifications to these codes may be needed, to set input file directories, sample names, and other project specific information.  
 
-# scRNA-seq
+# scRNA-seq analysis for construction of multicellular network models (MNM) and prioritization of upstream regulatory (UR) genes
 ## Quality assesment and full matrix construction
 
 To ensure good quality data for downstream analyses, it is recommended to remove poor quality cells from the analyses. Here, we define and keep the good quality cells as those having a minimum of 400 transcripts, 200 genes, and less than 20% mitochondrial genes. Due to the risk of duplicates in the library resulting in two or more cells sharing a cell barcode, it is also recommend to remove outliers, which can be based on empirical evaluation of the distributionan overestimation of transcripts count over the cells. 
@@ -41,3 +41,17 @@ Fig 1. log(number of DEGs) identified between allergen-stimulated and diluent-st
 
 <img src="https://user-images.githubusercontent.com/51739216/144604759-9677b860-46a9-4296-876b-eb5de3b69b1a.png" width="500" />  
 Fig 2. Cell type proportions in different groups of allergen-stimulated (A) and diluent-stimulated (D), as well as unstimulated control (C), samples from healthy individuals at the different time points.  
+
+## Upstream Regulatory gene prediction in Ingenuity Pathway Analysis (IPA)
+
+Steps for how to do the URs(upstream regulators) analysis by IPA and download the results.
+
+1. Create a new project (Example)in the Project Manager to upload the DEGs(differentially expressed genes)
+2. In the new project(Example), there’s “Dataset Files” where can upload the DEGs. ased on the data, choose the corresponding ID, for example, “Human gene symbol” or Entrez gene or. Meanwhile, upload the corresponding LogFC and q-value, and keep all of them as the same group, like observation 1.  And click “save”. And write down the name for the dataset.
+3. In the lower right corner find “Analyze/ filter dataset”, then click it, you will find “Core Analysis” and click it. 
+4. Click ”next”
+5. Then set up “General Settings and”  based on the dataset and aim For example, “Species”, “Data Sources” and so on. Also can SetCutoffs if you need.
+6. Then In the lower right corner find “Run Analysis” and click.
+7. After running analysis, in your project, you can find “Analyses”, check the result and click it.
+8. Find and click the “Upstream Analysis” in the top tab tools to show your results, then you can download the result by clicking 
+
