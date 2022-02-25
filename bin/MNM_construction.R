@@ -3,7 +3,6 @@ args = commandArgs(trailingOnly = TRUE)
 
 # set default parameters
 time_points <- c('0h', '12h', '1D', '2D', '3D', '5D', '7D')
-celltype_seq <- 1
 
 stop_quietly <- function() {
   opt <- options(show.error.messages = FALSE)
@@ -12,10 +11,19 @@ stop_quietly <- function() {
 }
 
 if (args[1]=='--help') {
-  print('singleR.R <full path to ipa-input directory> <full path to deg-input directory> <full output path>')
-  print('optional parameters; --time_points=<c(str, ...)> (default: 0h 12h 1D 2D 3D 5D 7D), 
-        --celltype_seq=<Int> (Unique section of input file-names specifying the cell type, separated by "_". Default: 1)')
-  print('Built on R version 4.1.2')
+  cat('singleR.R <full path to ipa-input directory> <full path to deg-input directory> <full output path>\n')
+  cat('Input ipa directory:
+        Should contain subdirectories, one for each time point (time point need to be in subdirectory name). 
+        Ensure that the directory  only contains files included in this analysis, or error will occur when listing files.
+        Ensure the names of files follows the system <[cellType]_[timePoint]_[other description].xls>\n')
+  cat('Input deg directory:
+        Ensure time points and cell type are named equally as in the ipa data file names.
+        The files should be named <degs_monocle_HA_vs_HC_[CellType]_[timePoint].txt> (Note, CellType in 6th position sep="_")\n')
+  cat('Output directory: Will be created if it does not exist.
+      If output files already exists, a number will be added to its name to prevent overwriting\n')
+  cat('optional parameters;\n')
+  cat('--time_points="str1" "str2" ... (default: 0h 12h 1D 2D 3D 5D 7D)\n') 
+  cat('Built on R version 4.1.2\n')
   stop_quietly()
 }
 
@@ -23,15 +31,24 @@ if (args[1]=='--help') {
 if (length(args)<3) {
   stop("At least three arguments must be supplied (see --help guide).n", call.=FALSE)
 }
+# read optional parameters
+if (length(args)>3) {
+  if (length(grep('--time_points', args, value = TRUE))==1){
+    analysis = 'time_points'
+    time_points <- c(strsplit(grep('--time_points', args, value = TRUE), split = '=')[[1]][[2]])
+  } else {
+    stop(paste("Don't recognize some of the flags;", args[3:length(args)]), call.=FALSE)
+  }
+}
 
 
 library(readxl)
 library(dplyr)
 
 # dir.home <- getwd()
-# dir.data <- paste(dir.home, '/ipa_output', sep = '')
-# dir.degs <- '../../sanli71/SAR_allergen_challenge_timeseries/SAR_allergic_vs_healthy_study/Monocle_out/DEGs_HA_vs_HC_allTimePoints/'
-# dir.out <- paste(dir.home, '/output', sep = '')
+# dir.data <- paste(dir.home, '/example_data/IPA_UR-prediction', sep = '')
+# dir.degs <- paste(dir.home, '/example_data/DEGs', sep = '')
+# dir.out <- paste(dir.home, '/output/test', sep = '')
 dir.data <- args[1]
 dir.degs <- args[2]
 dir.out <- args[3]
@@ -49,11 +66,14 @@ ipa_columns <- c("Upstream Regulator", "Expr Log Ratio", "Molecule Type",
                  "p-value of overlap", "Target Molecules in Dataset",
                  "Mechanistic Network")
 
-# for each time point, create the MCDM
+# for each time point, create the MNM
 for (time_point in time_points){
+  print(time_point)
+  # time_point <- time_points[5]
   # read in the ipa output files
+  print('Load the IPA data')
   indir <- list.files(dir.data, pattern = time_point, full.names = T)
-  ipa_files <- list.files(indir, pattern = '^[^UR_]', full.names = T)
+  ipa_files <- list.files(indir, full.names = T)
   ipa <- c()
   for (i in 1:length(ipa_files)){
     ipa[[i]] <- read_excel(ipa_files[i])
@@ -79,13 +99,13 @@ for (time_point in time_points){
     # sort the data only to include URs of interest
     ipa[[i]] <- ipa[[i]][which(ipa[[i]]$`Molecule Type` %in% molecule_types),]
   }
-  celltypes <- sapply(strsplit(ipa_files, '/'), '[[', 9)
+  celltypes <- list.files(indir)
   celltypes <- gsub(' ', '', celltypes)
-  celltypes <- sapply(strsplit(celltypes, '_'), '[[', celltype_seq)
-  # celltypes <- sapply(strsplit(celltypes, time_point), '[[', 1)
+  celltypes <- sapply(strsplit(celltypes, '_'), '[[', 1)
   names(ipa) <- celltypes
   
   # read in the DEG files
+  print('Load the DEG data')
   deg_files <- list.files(dir.degs, pattern = time_point, full.names = T) 
   degs <- c()
   for (i in 1:length(deg_files)){
@@ -93,23 +113,12 @@ for (time_point in time_points){
     # Only include positive FCs
     degs[[i]] <- degs[[i]][which(degs[[i]]$FC > 0),]
   }
-  celltypes <- sapply(strsplit(deg_files, '/'), '[[', 8)
+  celltypes <- list.files(dir.degs, pattern = time_point) 
   celltypes <- sapply(strsplit(celltypes, '_'), '[[', 6)
   names(degs) <- celltypes
   
-  # Ensure names are same format
-  if (any(tolower(names(ipa)) != tolower(names(degs))) == FALSE){ # ensure same order
-    names(ipa) <- names(degs)
-  } else if (time_point %in% c('12h', '1D', '2D', '3D', '5D', '7D')){ # I have manually checked that these files are ok
-    names(ipa) <- names(degs)
-  } else {
-    print(paste(time_point, 
-                ': names(ipa) and names(degs) cannot be standardized. Manual check required. Next loop',
-                sep = ''))
-    next
-  } 
-  
-  # Create MCDM
+  # Create MNM
+  print('Create MNM')
   for (i in 1:length(ipa)){
     # i <- 1
     target_ct <- names(ipa)[i]
@@ -128,18 +137,19 @@ for (time_point in time_points){
       ipa_sub <- ipa[[i]][which(ipa[[i]]$`Upstream Regulator` %in% urs_deg),]
       degs_sub <- degs[[z]][which(degs[[z]]$Symbol %in% urs_deg),]
       ipa_sub <- full_join(ipa_sub, degs_sub, by = c('Upstream Regulator' = 'Symbol'))
-      ipa_sub$'Differentially expressed in' <- source_ct
-      ipa_sub$'UR in cells' <- target_ct
+      ipa_sub$'Source cell type' <- source_ct
+      ipa_sub$'Target cell type' <- target_ct
       if (i == 1 & z == 1){
-        MCDM_out <- ipa_sub
+        MNM_out <- ipa_sub
       } else {
-        colnames(MCDM_out) == colnames(ipa_sub)
-        MCDM_out <- rbind(MCDM_out, ipa_sub)
+        colnames(MNM_out) == colnames(ipa_sub)
+        MNM_out <- rbind(MNM_out, ipa_sub)
       }
     }
   }
   
   # Save output file
+  print('Save to output')
   out_name <- paste(time_point, '_UR_interactions.csv', sep = '')
   # Control not to overwrite existing files
   if (file.exists(paste(dir.out, out_name, sep = '/'))){
@@ -147,11 +157,8 @@ for (time_point in time_points){
                       length(list.files(dir.out, pattern = out_name)), '.csv', sep = '')
     print('Output file already exists. Name adjusted not to overwrite')
   }
-  write.csv(MCDM_out, paste(dir.out, out_name, sep = '/'), row.names = F)
+  write.csv(MNM_out, paste(dir.out, out_name, sep = '/'), row.names = F)
   print(paste(out_name, 'was created'))
   
 }
-
-
-
 
