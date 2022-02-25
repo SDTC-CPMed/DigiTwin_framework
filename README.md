@@ -48,6 +48,7 @@ Steps for how to predict the URs by IPA and download the results.
 IPA is a commercial software, but you can request a free trial here (https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-ipa/)
 
 1. Create a new project (Example)in the Project Manager to upload the DEGs(differentially expressed genes)
+<img src="https://user-images.githubusercontent.com/51739216/155742486-d36454fe-081b-4dfc-8022-789aa849a87b.png" width="300" /> 
 
 2. In the new project(Example), there’s “Dataset Files” where can upload the DEGs. ased on the data, choose the corresponding ID, for example, “Human gene symbol” or Entrez gene or. Meanwhile, upload the corresponding LogFC and q-value, and keep all of them as the same group, like observation 1.  And click “save”. And write down the name for the dataset.
 3. In the lower right corner find “Analyze/ filter dataset”, then click it, you will find “Core Analysis” and click it. 
