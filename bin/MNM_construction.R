@@ -23,7 +23,7 @@ if (args[1]=='--help') {
       If output files already exists, a number will be added to its name to prevent overwriting\n')
   cat('optional parameters;\n')
   cat('--time_points="str1" "str2" ... (default: 0h 12h 1D 2D 3D 5D 7D)\n') 
-  cat('Built on R version 4.1.2\n')
+  cat('Built on R version 4.0.4\n')
   stop_quietly()
 }
 
