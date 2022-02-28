@@ -44,12 +44,12 @@ Fig 2. Cell type proportions in different groups of allergen-stimulated (A) and 
 
 ## Upstream Regulatory (UR) gene prediction in Ingenuity Pathway Analysis (IPA)
 
-IPA is a commercial software, but you can request a free trial here (https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-ipa/)
+IPA is a commercial software, but you can request a free trial here (https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-ipa/). 
 
-1. Create a new project (Example) in the Project Manager to upload the DEGs (differentially expressed genes)
+1. First, we created a new project (SAR) in the Project Manager to upload the DEGs (differentially expressed genes)
 <img src="https://user-images.githubusercontent.com/51739216/155742486-d36454fe-081b-4dfc-8022-789aa849a87b.png" width="300" /> 
 
-2. Upload the DEGs into “Dataset Files”, in the new project (Example). Based on the data, choose the corresponding ID, for example, “Human gene symbol” or "Entrez gene ID". Add the corresponding LogFC and q-value cut-offs, and keep all of them as the same group, e.g., observation 1.  Click “save” and name the dataset.
+2. In the 'SAR' project, we upload the DEGs (including their corresponding LogFCs and q-values) into “Dataset Files”. Based on our data, we choose the corresponding ID, “Human gene symbol”, and the observation names, "Expr Log Ratio" (LogFC) and "Expr False Discovery Rate" (q-val). Both LogFC and q-val were kept as the same group, "observation 1".  Click “save” and name the dataset.
 <img src="https://user-images.githubusercontent.com/51739216/155743247-58c3ab2c-3c9c-41a3-85bf-b36e51239ca4.png" width="450" />
 
 3. In the lower right corner click “Analyze/Filter Dataset”, then “Core Analysis”. 
@@ -74,6 +74,6 @@ The MNMs are constructed for each time point by running MNM_construction.R in R 
 
 >Rscript MNM_construction.R ../example_data/IPA_UR-prediction ../example_data/DEGs ../output
 
-
+The URs from the IPA predictions are ranked based on the number of cell types and time points in which they were predicted, by running UR_ranking.R in R 4.0. Input to this script are the UR predictions from IPA. The structure of the data should be the same as for MNM construction, with one subdirectory per time   
 
 
