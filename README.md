@@ -68,5 +68,9 @@ IPA is a commercial software, but you can request a free trial here (https://dig
 8. Choose “Upstream Analysis” in the top tab tools to show your results. You can download the result by clicking <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />
 <img src="https://user-images.githubusercontent.com/51739216/155744562-c6748942-bb6f-4fb7-b602-1b0be72e8aaf.png" width="450" />
 
+## Construction of multicellular network models (MNMs) and ranking of URs
+
+The MNMs are constructed based on the UR-prediction from IPA and the lists of DEGs, for each cell type in each time point using 
+
 
 
