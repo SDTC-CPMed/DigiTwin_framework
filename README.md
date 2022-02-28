@@ -70,10 +70,7 @@ IPA is a commercial software, but you can request a free trial here (https://dig
 
 ## Construction of multicellular network models (MNMs) and ranking of URs
 
-The MNMs are constructed for each time point by running MNM_construction.R in R 4.0. Input to this script are the UR predictions from IPA and the list of DEGs. For the script to run smoothly, ensure that the input directory comtaining the UR predictions from IPA includes one subdirectory per time point, which in turn should include only, but all, the files to construct the MNMs. Additionally, ensure that the directory containing the DEGs includes only, but all, the files for MNM construction. See 
->Rscript MNM_construction.R --help  
-
-for more details. 
+The MNMs are constructed for each time point by running MNM_construction.R in R 4.0. Input to this script are the UR predictions from IPA and the list of DEGs. For the script to run smoothly, ensure that the input directory comtaining the UR predictions from IPA includes one subdirectory per time point, which in turn should include only, but all, the files to construct the MNMs. Additionally, ensure that the directory containing the DEGs includes only, but all, the files for MNM construction. See 'Rscript MNM_construction.R --help' for more details. 
 
 >Rscript MNM_construction.R ../example_data/IPA_UR-prediction ../example_data/DEGs ../output
 
