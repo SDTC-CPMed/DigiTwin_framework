@@ -47,22 +47,24 @@ Fig 2. Cell type proportions in different groups of allergen-stimulated (A) and 
 IPA is a commercial software, but you can request a free trial here (https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-ipa/). 
 
 1. First, we created a new project (SAR) in the Project Manager to upload the DEGs (differentially expressed genes)
-<img src="https://user-images.githubusercontent.com/51739216/155742486-d36454fe-081b-4dfc-8022-789aa849a87b.png" width="300" /> 
+<img src="https://user-images.githubusercontent.com/51739216/155988719-ef25e83b-24ca-4e51-bd9f-d9a4c15de186.png" width="300" />
 
-2. In the 'SAR' project, we upload the DEGs (including their corresponding LogFCs and q-values) into “Dataset Files”. Based on our data, we choose the corresponding ID, “Human gene symbol”, and the observation names, "Expr Log Ratio" (LogFC) and "Expr False Discovery Rate" (q-val). Both LogFC and q-val were kept as the same group, "observation 1".  Click “save” and name the dataset.
-<img src="https://user-images.githubusercontent.com/51739216/155743247-58c3ab2c-3c9c-41a3-85bf-b36e51239ca4.png" width="450" />
+For each list of DEGs, we then performed step 2 - 8, for UR prediction in IPA. In those cases where >5000 significant DEGs were identified, we included the top 5000 DEGs (based on lowest q-value) into the IPA analysis, due to limitations in IPA. 
 
-3. In the lower right corner click “Analyze/Filter Dataset”, then “Core Analysis”. 
+2. In the 'SAR' project, we upload the DEGs (including their corresponding LogFCs and q-values) into “Dataset Files”. Based on our data, we choose the corresponding ID, “Human gene symbol”, and the observation names, "Expr Log Ratio" (LogFC) and "Expr False Discovery Rate" (q-val). Both LogFC and q-val were kept as the same group, "observation 1". We then “save” and name the dataset.
+<img src="https://user-images.githubusercontent.com/51739216/155989006-ebb0b1b1-e2bb-4677-93b4-63a636739b6e.png" width="450" />
+
+3. In the lower right corner, we clicked “Analyze/Filter Dataset” and then “Core Analysis”. 
 <img src="https://user-images.githubusercontent.com/51739216/155743530-21a556a6-26d2-4e3c-95eb-de632dccec07.png" width="450" />
 
-4. Click ”next”
+4. Thereafter, we clicked ”next”, taking us to the settings. 
 <img src="https://user-images.githubusercontent.com/51739216/155743696-ac146033-b553-44b1-a020-9ca9e8bae46d.png" width="350" />
 
-5. Based on the dataset and aim, define “General Settings”, “Species”, “Data Sources”, etc. Define cut-offs at "SetCutoffs".
-6. In the lower right corner, click “Run Analysis”.
+5. In the settings. based on our dataset, we defined “General settings - Species” = Human, “Node Types” = All, “Data Sources” = All, “Tissues&Cell Lines” = All, and “Mutation” = All.
+6. We then ran the analyses by “Run Analysis”.
 <img src="https://user-images.githubusercontent.com/51739216/155743923-9a944d12-d598-4b49-82b7-0a445c43a23c.png" width="450" />
 
-7. After analyses has been run, you can find them in your project under “Analyses”. Choose your analysis to check the results.
+7. All the performed analyses can be found in fter analyses has been run, you can find them in your project under “Analyses”. Choose your analysis to check the results.
 <img src="https://user-images.githubusercontent.com/51739216/155744209-01ac7e35-4ed6-4325-9061-b284f00b71b7.png" width="300" />
 
 8. Choose “Upstream Analysis” in the top tab tools to show your results. You can download the result by clicking <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />
