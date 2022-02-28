@@ -15,8 +15,8 @@ if (args[1]=='--help') {
       Ensure the names of files follows the system <[cellType]_[timePoint]_[other description].xls>
       Ensure that the cell types are named equally between the different time points\n')
   cat('Output directory: Will be created if it does not exist.
-      Note that output which already exists will be overwritten\n')
-  cat('Built on R version 4.1.2\n')
+      Note that output files which already exists will be overwritten\n')
+  cat('Built on R version 4.0.4\n')
   stop_quietly()
 }
 
