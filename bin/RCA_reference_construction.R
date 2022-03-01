@@ -1,7 +1,6 @@
 # Sandra Lilja
 
-#library(remotes)
-#install_github("prabhakarlab/RCA")
+#' Build references for cell type identification
 
 
 #######################
@@ -65,11 +64,9 @@ colSums(FCs>=co)
 IN = rowSums(FCs>=co)!=0 
 sum(IN)
 Tcellref = log10(XX[IN,])
-#write.csv(Tcellref, 'data/RCA_references/GlobalPanel_MonvsDCvsBvsTNK.csv')
-### Saving a new reference to RCA sysdata
-Tcellref = read.csv('/data/sharedData/SAR_allergen_challenge_timeseries/RCA_references/GlobalPanel_MonvsDCvsBvsTNK.csv',
-                           row.names = 1)
+write.csv(Tcellref, 'data/RCA_references/GlobalPanel_MonvsDCvsBvsTNK.csv')
 
+### Saving a new reference to RCA sysdata
 data(sysdata, package='RCA')
 sysdata = sysdata[!(names(sysdata) %in% c('GlobalPanel_MonvsDCvsBvsTNK'))]
 sysdata = append(sysdata,

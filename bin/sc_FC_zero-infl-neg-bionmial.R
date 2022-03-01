@@ -1,16 +1,18 @@
 # Sandra Lilja
 
+#' FC calculations
+#' 
+#' @param tissue Either 'HA' for allergic patients of 'HC' for healthy controls
+#' 
+#' @return no return, just saves the files into data folder
+#' @export
+#'
+
 library(pscl)
 library(foreach)
 library(doParallel)
 library(dplyr)
 
-### Code update plan!
-### add some print() lines so that I can follow the execution (eg. print(cllx))
-### Make it executable from command line
-
-# sampleid <- 'HC'
-sampleid <- 'HA'
 
 sc_FC_zero_infl_neg_binomial = function(tissue){
   mat.data <- list.files('data/DEGS_with_Monocle/Matrix_in/', full.names = T)
@@ -36,7 +38,7 @@ sc_FC_zero_infl_neg_binomial = function(tissue){
                   '_AllergenChallenged_vs_NonChallenged.txt.gz', sep = '')
     if (length(list.files(dir.data, pattern = nfit)) == 1){
       nfit <- paste(dir.data, nfit, sep = '')
-      D <- read.csv(nfit, sep = ' ', dec = ',')
+      D <- read.csv(nfit, sep = ' ')
       return(D)
     } else if (length(list.files(dir.data, pattern = nfit)) == 0){
       print(paste(cllx, timepointx, 'no DEG list found', sep = ' '))

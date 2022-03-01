@@ -1,12 +1,19 @@
 # Sandra Lilja
 
+#' Calculate DEGs
+#' 
+#' @param tissue Either 'HA' for allergic patients of 'HC' for healthy controls
+#' 
+#' @return no return, just saves the files into data folder
+#' @export
+#'
+
+
 library('monocle')
 library('reshape2')
 library(R.utils)
-#rm(list=ls())
 
-#tissue <- 'HC'
-tissue <- 'HA'
+
 
 Monocle_v3_RAdata = function(tissue){
   dir.data <- 'data/DEGS_with_Monocle/Matrix_in/'
@@ -17,8 +24,7 @@ Monocle_v3_RAdata = function(tissue){
   
   ## load data:
   scrna = read.csv(paste(dir.data, tissue, '_ENTREZ_expression_matrix.csv', sep = ''), sep = ' ', row.names = 1)
-  #scrna = readRDS(paste(dir.data, tissue, '_ENTREZ_expression_matrix.rds', sep = ''))
-  
+
   scrna[1:5,1:5]
   
   # Note:
@@ -93,8 +99,7 @@ Monocle_v3_RAdata = function(tissue){
                                             fullModelFormulaStr = "~state", cores = 30)
   
       write.table(diff_test_res,paste(dir.out,'Monocle_DEGs_', tissue, '_',ucelltypes[z],'_',usource[i],'_AllergenChallenged_vs_NonChallenged.txt',sep=''),row.names=F)
-      #saveRDS(diff_test_res,paste(dir.out,'Monocle_DEGs_', tissue, '_',ucelltypes[z],'_',usource[i],'_AllergenChallenged_vs_NonChallenged.rds',sep=''))
-      
+
       rm(list=c('scrna_subset','diff_test_res')) 
     }
   }

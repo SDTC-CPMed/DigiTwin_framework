@@ -35,27 +35,10 @@ write.csv(HC, 'data/HC_min200genesPerCell_sorted_expression_matrix.csv', quote =
 
 
 
+
 ### Run knn smoothing
 #system(chmod u+x run_knn_smoothing.sh)
-
 system('./run_knn_smoothing.sh ')
-
-
-dir.create("plot")
-dir.create("data")
-dir.create("data/DEGS_with_Monocle")
-dir.create("data/DEGS_with_Monocle/Matrix_in")
-dir.create("data/DEGS_with_Monocle/Monocle_out")
-dir.create("data/DEGS_with_Monocle/Monocle_out_withFCs")
-dir.create("data/knn_smoothing")
-dir.create("data/RCA_out")
-dir.create("data/RCA_out/full_matrix")
-dir.create("data/RCA_references")
-
-###
-# Read data from GSE180697 and save it to data folder
-
-
 
 
 ### Run cell typing

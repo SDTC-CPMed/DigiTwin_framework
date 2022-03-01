@@ -1,5 +1,14 @@
 # Sandra Lilja
 
+#' Cell type identification using reference component analysis
+#' 
+#' @param tissue Either 'HA' for allergic patients of 'HC' for healthy controls
+#' 
+#' @return no return, just saves the files into data folder
+#' @export
+#'
+
+
 library(dplyr)
 library(RCA)
 library(data.table)
@@ -29,12 +38,10 @@ RCA_cellType_identification = function(tissue){
     if (roundx == 1){
       ### Round 1
       X <- read.csv(paste(dir.data, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '.csv.gz', sep = ''), sep = ',', header = T, row.names = 1)
-      #X = read.csv('/data/sharedData/SAR_allergen_challenge_timeseries/SAR_allergic_patient_study/DGE_data/knn_smoothed_DGEs/HA_min200genesPerCell_sorted_expression_matrix.knn-smooth_k14.csv.gz',
-      #             sep = ',', header = T, row.names = 1)
+
     } else if (roundx == 2){
       ### Round 2
       clust.method <- 'GlobalPanel_MonvsDCvsBvsTNK'
-      #X <- read.table(paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix_und-rm_withCellTypes_', clust.method, '.txt.gz', sep = ''), sep = '\t', header = T, row.names = 1)
       X <- readRDS(paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes_', clust.method, '.rds', sep = ''))
       
       X[1:5,1:5]
@@ -43,7 +50,6 @@ RCA_cellType_identification = function(tissue){
     } else if (roundx == 3){
       # ### Round 3
       clust.method <- 'CellRef_Huan_PBMC_CD4vsCD8vsNK'
-      #X <- read.table(paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix_und-rm_withCellTypes_', clust.method, '.txt.gz', sep = ''), sep = '\t', header = T, row.names = 1)
       X <- readRDS(paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes_', clust.method, '.rds', sep = ''))
       
       X[1:5,1:5]
@@ -167,10 +173,8 @@ RCA_cellType_identification = function(tissue){
     write.csv(corrScorRHO, paste(dir.out, samplename, '_corrScorRHO_', clust.method, '.csv', sep = ''))
     
 
-    #setwd(dir.out)
     RCAPlotMy(data.obj)
     files <- list.files(dir.out, pattern = '^RCAplot*', full.names = T)
-    #setwd(dir.home1)
     samplename <- paste(tissue, "und-rm", clust.method, sep = '_')
     sapply(files, FUN = function(eachPath){
       file.rename(from = eachPath, to= sub(pattern = paste('\\', dir.out, '/', sep = ''), paste0(paste('\\', dir.out, '/', samplename, '_', sep = '')), eachPath))
@@ -181,20 +185,7 @@ RCA_cellType_identification = function(tissue){
     colnames(out.X) <- paste(gsub('_', '-', labels$RCA), colnames(out.X), sep = '_')
     length(grep(FALSE, gsub('-', '_', sapply(strsplit(colnames(out.X), '_'), '[', 1)) == labels$RCA))
     saveRDS(out.X, file = paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes_', clust.method, '.rds', sep = ''))
-    #write.table(out.X, paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes_', clust.method, '.txt', sep = ''), sep = '\t', col.names = T, row.names = T, quote = F)
-    #filenames <- list.files(dir.out, pattern = clust.method, full.names = T)
-    #for(filename in filenames){
-    #  gzip(filename)
-    #}
     
-
-    #  if (roundx == 1){
-    #    clust.method <- "GlobalPanel_MonvsDCvsBvsTNK"
-    #  } else if (roundx == 2){
-    #    clust.method <- "CellRef_Huan_PBMC_CD4vsCD8vsNK"
-    #  } else if (roundx == 3){
-    #    clust.method <- "CellRef_Huan_PBMC_CD4subsets"
-    #  }
     
     # Combine all the results into one matrix
     if (roundx == 3){
@@ -202,15 +193,12 @@ RCA_cellType_identification = function(tissue){
       ### create full matrix
       names(sysdata)
       clust.method <- "GlobalPanel_MonvsDCvsBvsTNK"
-      #X1 <- read.table(paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes_', clust.method, '.txt.gz', sep = ''), sep = '\t', header = T, row.names = 1)
       X1 <- readRDS(paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes_', clust.method, '.rds', sep = ''))
       
       clust.method <- "CellRef_Huan_PBMC_CD4vsCD8vsNK"
-      #X2 <- read.table(paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes_', clust.method, '.txt.gz', sep = ''), sep = '\t', header = T, row.names = 1)
       X2 <- readRDS(paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes_', clust.method, '.rds', sep = ''))
       
       clust.method <- "CellRef_Huan_PBMC_CD4subsets"
-      #X3 <- read.table(paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes_', clust.method, '.txt.gz', sep = ''), sep = '\t', header = T, row.names = 1)
       X3 <- readRDS(paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes_', clust.method, '.rds', sep = ''))
       
       
@@ -223,15 +211,6 @@ RCA_cellType_identification = function(tissue){
       
       # combine the data
       X <- cbind(X1,X2,X3)
-      # write to output file, gene names as symbols
-      #write.table(X, paste(dir.out, 'full_matrix/', tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes.txt', sep = ''), sep = '\t', col.names = T, row.names = T, quote = F)
-      
-      #### Convert GeneSymbols to entrez and save ####
-      #################################################
-      names(sysdata)
-      #clust.method <- "CellRef_Huan_PBMC_spec"
-      # X <- read.table(paste(dir.out.data, tissue, '_min200genesPerCell_sorted_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes_', clust.method, '.txt.gz', sep = ''), sep = '\t')
-      # X <- read.table(paste(dir.out, tissue, '_min200genesPerCell_sorted_expression_matrix_und-rm_withCellTypes_', clust.method, '.txt.gz', sep = ''), sep = '\t')
       X[1:5,1:5]
       
       ref <- read.csv('data/gene_info_taxid-9606_version-20170511.tsv.gz', sep = '\t')
@@ -250,15 +229,8 @@ RCA_cellType_identification = function(tissue){
       X[1:5,1:5]
       
 
-      #write.table(X, paste(dir.out, 'full_matrix/', tissue, '_min200genesPerCell_sorted_ENTREZ_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes.txt', sep = ''), sep = '\t', col.names = T, row.names = T, quote = F)
       saveRDS(X, file = paste(dir.out, 'full_matrix/', tissue, '_min200genesPerCell_sorted_ENTREZ_expression_matrix.knn-smooth_', k, '_und-rm_withCellTypes.rds', sep = ''))
       
-      #################################################
-      ## gzip out
-      #filename <- list.files(paste(dir.out, 'full_matrix/', sep = ''), pattern = '.txt', full.names = T)
-      #for (i in 1:length(filename)){
-      #  gzip(filename[i])
-      #}
     }
   }
   

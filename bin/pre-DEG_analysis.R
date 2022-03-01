@@ -1,12 +1,15 @@
 # Sandra Lilja
 
-### Create CellCount per timepoint/sample table
-### Create csv files for FC analysis
 
-#rm(list=ls())
+#' Create CellCount per timepoint/sample table
+#' Create csv files for FC analysis
+#' 
+#' @param tissue Either 'HA' for allergic patients of 'HC' for healthy controls
+#' 
+#' @return no return, just saves the files into data folder
+#' @export
+#'
 
-#tissue = 'HC'
-#kval = '21'
 
 pre_DEG_analysis = function(tissue){
   if(tissue == 'HC'){kval = '21'
@@ -18,12 +21,8 @@ pre_DEG_analysis = function(tissue){
   dir.out2 <- 'data/DEGS_with_Monocle/Matrix_in/'
   
   
-  #X_Sandra = read.table('/data/sharedData/SAR_allergen_challenge_timeseries/SAR_healty_control_study/DGE_data/RCA_out/matrices_withCellTypes/full_matrix/HC_min200genesPerCell_sorted_ENTREZ_expression_matrix.knn-smooth_k21_und-rm_withCellTypes.txt.gz',
-  #                      header = T, row.names = 1)
   
   ## load data:
-  #X = read.table(paste(dir.data, tissue, '_min200genesPerCell_sorted_ENTREZ_expression_matrix.knn-smooth_k', kval, '_und-rm_withCellTypes.txt.gz', sep = ''),
-  #               header = T, row.names = 1)
   X = readRDS(paste(dir.data, tissue, '_min200genesPerCell_sorted_ENTREZ_expression_matrix.knn-smooth_k', kval, '_und-rm_withCellTypes.rds', sep = ''))
   X[1:5,1:5]
   
@@ -65,7 +64,6 @@ pre_DEG_analysis = function(tissue){
   #### DEG/FC csv file  
   #########################################
   write.table(X, paste(dir.out2, tissue, '_ENTREZ_expression_matrix.csv', sep = ''), sep = ' ', row.names = T, col.names = NA, quote = F)
-  #saveRDS(X, paste(dir.out2, tissue, '_ENTREZ_expression_matrix.rds', sep = ''))
 
   
   #########################################

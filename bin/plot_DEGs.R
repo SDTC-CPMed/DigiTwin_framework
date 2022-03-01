@@ -1,5 +1,13 @@
 # Sandra Lilja
 
+#' Calculate DEGs
+#' 
+#' 
+#' @return no return, just saves the plots into plot folder
+#' @export
+#'
+
+
 library(dplyr)
 library(plyr)
 library(ggplot2)
@@ -46,7 +54,7 @@ plot_custom = function(){
   newplot <- ggplot(ndata, aes(x = day, y = log_nDEGs, color = celltype, group = celltype)) +
     geom_point() +
     geom_line()
-  pdf(paste(dir.out.images, '/lognDEGs_over_time3.pdf', sep = ''))
+  pdf(paste(dir.out.images, '/lognDEGs_over_time.pdf', sep = ''))
   newplot
   dev.off()
   
@@ -56,15 +64,10 @@ plot_custom = function(){
   library(ggplot2)
   library(scales)
   library(reshape2)
-  #rm(list=ls())
-  
-  #dir.home <- getwd()
+
   dir.data <- 'data/RCA_out/full_matrix/'
   
-#  aa <- list.files(dir.data, pattern = 'ENTREZ')
-#  aa <- list.files(dir.data)
-  
-  #X <- read.table(paste(dir.data, aa, sep = ''), header = T, sep = '\t', row.names = 1)
+
   X <- readRDS('data/RCA_out/full_matrix/HA_min200genesPerCell_sorted_ENTREZ_expression_matrix.knn-smooth_k14_und-rm_withCellTypes.rds')
   
   X[1:5,1:5]
@@ -85,7 +88,7 @@ plot_custom = function(){
     geom_bar(stat="identity", position = "fill") +
     scale_y_continuous(labels = percent_format())+
     facet_grid(~timepoint) + theme_bw()
-  pdf(paste(dir.out.images, '/celltype_ratios_over_groups4.pdf', sep = ''))
+  pdf(paste(dir.out.images, '/celltype_ratios_over_groups.pdf', sep = ''))
   
   newplot
   dev.off()
