@@ -46,35 +46,45 @@ Fig 2. Cell type proportions in different groups of allergen-stimulated (A) and 
 
 IPA is a commercial software, but you can request a free trial here (https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-ipa/). 
 
-1. First, we created a new project (SAR) in the Project Manager to upload the DEGs (differentially expressed genes)
+To reproduce the analyses for prediction of URs from our project, follow the following pipeline.
+
+1. Creat a project (eg. SAR) in the Project Manager to upload the DEGs (differentially expressed genes)
 <img src="https://user-images.githubusercontent.com/51739216/155988719-ef25e83b-24ca-4e51-bd9f-d9a4c15de186.png" width="300" />
 
-For each list of DEGs, we then performed step 2 - 6, for UR prediction in IPA. In those cases where >5000 significant DEGs were identified, we included the top 5000 DEGs (based on lowest q-value) into the IPA analysis, due to limitations in IPA. 
+For each list of DEGs, perform step 2 - 8, for UR prediction in IPA. In those cases where >5000 significant DEGs were identified, the DEGs need to be prioritized, due to limitations in IPA. We included the top 5000 DEGs (based on lowest q-value) into the IPA analysis. 
 
-2. In the 'SAR' project, we upload the DEGs (including their corresponding LogFCs and q-values) into “Dataset Files”. Based on our data, we chose the corresponding ID, “Human gene symbol”, and the observation names, "Expr Log Ratio" (LogFC) and "Expr False Discovery Rate" (q-val). Both LogFC and q-val were kept as the same group, "observation 1". We then saved (by ”save”) and named the dataset.
+2. Upload the DEGs into the project “Dataset Files”, including their corresponding LogFCs and q-values. Based on this data, choose the corresponding ID, “Human gene symbol”, and the observation names, "Expr Log Ratio" (LogFC) and "Expr False Discovery Rate" (q-val). Keep both LogFC and q-val as the same group, "observation 1". ”Save” and name the dataset.
 <img src="https://user-images.githubusercontent.com/51739216/155989006-ebb0b1b1-e2bb-4677-93b4-63a636739b6e.png" width="450" />
 
-3. In the lower right corner, we clicked “Analyze/Filter Dataset” and then “Core Analysis”. 
+3. In the lower right corner, click “Analyze/Filter Dataset” and then “Core Analysis” to perform IPA analysis of the data. 
 <img src="https://user-images.githubusercontent.com/51739216/155743530-21a556a6-26d2-4e3c-95eb-de632dccec07.png" width="450" />
 
-4. Thereafter, we clicked ”next”, taking us to the settings. 
+4. Click ”next”, to get to the settings. 
 <img src="https://user-images.githubusercontent.com/51739216/155743696-ac146033-b553-44b1-a020-9ca9e8bae46d.png" width="350" />
 
-5. In the settings. based on our dataset, we defined “General settings - Species” = Human, “Node Types” = All, “Data Sources” = All, “Tissues&Cell Lines” = All, and “Mutation” = All.
-6. We then ran the analyses by “Run Analysis”.
+5. In the settings. based on this dataset, define “General settings - Species” = Human, “Node Types” = All, “Data Sources” = All, “Tissues&Cell Lines” = All, and “Mutation” = All.
+6. Run the analyses by “Run Analysis”.
 <img src="https://user-images.githubusercontent.com/51739216/155743923-9a944d12-d598-4b49-82b7-0a445c43a23c.png" width="450" />
 
-7. All the performed analyses could then be found in the “SAR” project under “Analyses”. We chose an analysis to check the results.
+7. All the performed analyses can be found in the “SAR” project under “Analyses”. Choose one of the analyses to check the results.
 <img src="https://user-images.githubusercontent.com/51739216/155744209-01ac7e35-4ed6-4325-9061-b284f00b71b7.png" width="300" />
 
-8. In the top tab tools, we chose “Upstream Analysis” to show your results. The results were downloaded by clicking <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />
+8. In the top tab tools, go to “Upstream Analysis” to show the UR prediction results. The results can be downloaded by clicking <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />
 <img src="https://user-images.githubusercontent.com/51739216/155744562-c6748942-bb6f-4fb7-b602-1b0be72e8aaf.png" width="450" />
 
 ## Construction of multicellular network models (MNMs) and ranking of URs
 
+To run the whole pipeline, on the example data-set, after IPA UR prediction, run post_IPA.sh 
+
+>./post_IPA.sh
+
+### MNM construction
+
 The MNMs are constructed for each time point by running MNM_construction.R in R 4.0. Input to this script are the UR predictions from IPA and the list of DEGs. For the script to run smoothly, ensure that the input directory comtaining the UR predictions from IPA includes one subdirectory per time point, which in turn should include only, but all, the files to construct the MNMs. Additionally, ensure that the directory containing the DEGs includes only, but all, the files for MNM construction. See 'Rscript MNM_construction.R --help' for more details. 
 
 >Rscript MNM_construction.R ../example_data/IPA_UR-prediction ../example_data/DEGs ../output
+
+### Ranking of URs
 
 The URs from the IPA predictions are ranked based on the number of cell types and time points in which they were predicted, by running UR_ranking.R in R 4.0. Input to this script are the UR predictions from IPA. The structure of the data should be the same as for MNM construction, with one subdirectory per time   
 
