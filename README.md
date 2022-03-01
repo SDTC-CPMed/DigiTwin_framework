@@ -88,6 +88,9 @@ The MNMs are constructed for each time point by running MNM_construction.R in R 
 
 >Rscript MNM_construction.R ../example_data/IPA_UR-prediction ../example_data/DEGs ../output
 
+<img src="https://user-images.githubusercontent.com/51739216/156147705-376f2547-e328-4a4c-9505-9c416da3aa36.png" width="500" /> 
+Fig 3. MNM at 0h, illustrated using cytoscape (https://cytoscape.org/).
+
 ### Ranking of URs
 
 The URs from the IPA predictions are ranked based on the number of cell types and time points in which they were predicted, by running UR_ranking.R in R 4.0. Input to this script are the UR predictions from IPA. The structure of the data should be the same as for MNM construction, with one subdirectory per time point. See 'Rscript UR_ranking.R --help' for more details. 
@@ -95,5 +98,5 @@ The URs from the IPA predictions are ranked based on the number of cell types an
 >Rscript UR_ranking.R ../example_data/IPA_UR-prediction ../output
 
 <img src="https://user-images.githubusercontent.com/51739216/156146083-8c047e4f-f135-4b48-b9c9-d8ee52d10fcd.png" width="500" /> 
-Fig 3. Heatmap with rank-ordered URs in rows and all the cell types over all time points in columns.  
+Fig 4. Heatmap with rank-ordered URs in rows and all the cell types over all time points in columns.  
 
