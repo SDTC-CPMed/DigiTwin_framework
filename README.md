@@ -3,7 +3,11 @@ Below scripts works using R 3.4, R 4.0 and python 3.7.4.
 Note that the R scripts are not developed to be executed from command line. We recommend using RStudio for running these scripts. Modifications to these codes may be needed, to set input file directories, sample names, and other project specific information.  
 
 # scRNA-seq analysis for construction of multicellular network models (MNM) and prioritization of upstream regulatory (UR) genes
-## Quality assesment and full matrix construction
+
+## Data preparation, and analyses for UR prediction and MNM construction
+
+
+### Quality assesment and full matrix construction
 
 To ensure good quality data for downstream analyses, it is recommended to remove poor quality cells from the analyses. Here, we define and keep the good quality cells as those having a minimum of 400 transcripts, 200 genes, and less than 20% mitochondrial genes. Due to the risk of duplicates in the library resulting in two or more cells sharing a cell barcode, it is also recommend to remove outliers, which can be based on empirical evaluation of the distributionan overestimation of transcripts count over the cells. 
 
@@ -12,7 +16,7 @@ First, we combined the output files from getDgem into a matrix using full_sc-mat
 1. full_sc-matrix_construction.R # Combine the matrices from all samples and set specific quality cut-offs
 2. sc_data_quality_sorting.R # Check the quality of the data and remove outliers
 
-## Cell type analysis
+### Cell type analysis
 
 The references for cell type identification were created by RCA_reference_construction.R in R 3.4, and added to the RCA sysdata file installed. Input to this scripts are the normalized matrix output from microarray analyses based on which the references should be constructed.   
 
@@ -21,7 +25,7 @@ RCA_cellType_identification.R is then run to map the cells towards the newly cre
 1. RCA_reference_construction.R # Build references for cell type identification
 2. RCA_cellType_identification.R # Cell type identification using reference component analysis
 
-## Differnetial expression analysis 
+### Differnetial expression analysis 
 
 To prepare the data from cell type analysis for differential expression analysis, we run pre-DEG_analysis.R. This script will ensure that the input to Monocle_v3_RAdata.r is is the correct format. It will also compute some basic statistics, such as the number of cells per sample (cell type, time point, etc). 
 
