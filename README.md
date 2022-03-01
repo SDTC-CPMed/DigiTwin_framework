@@ -68,10 +68,10 @@ For each list of DEGs, perform step 2 - 8, for UR prediction in IPA. In those ca
 
 5. In the settings. based on this dataset, define “General settings - Species” = Human, “Node Types” = All, “Data Sources” = All, “Tissues&Cell Lines” = All, and “Mutation” = All.
 6. Run the analyses by “Run Analysis”.
-<img src="https://user-images.githubusercontent.com/51739216/155743923-9a944d12-d598-4b49-82b7-0a445c43a23c.png" width="450" />
+<img src="https://user-images.githubusercontent.com/51739216/156144451-22be3f42-08d2-4698-abef-22737098cfe8.png" width="450" />
 
 7. All the performed analyses can be found in the “SAR” project under “Analyses”. Choose one of the analyses to check the results.
-<img src="https://user-images.githubusercontent.com/51739216/155744209-01ac7e35-4ed6-4325-9061-b284f00b71b7.png" width="300" />
+<img src="https://user-images.githubusercontent.com/51739216/156144896-1f4c9511-02df-474c-a4f1-ba39ec1f67ca.png" width="300" />
 
 8. In the top tab tools, go to “Upstream Analysis” to show the UR prediction results. The results can be downloaded by clicking <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />
 <img src="https://user-images.githubusercontent.com/51739216/155744562-c6748942-bb6f-4fb7-b602-1b0be72e8aaf.png" width="450" />
@@ -90,6 +90,10 @@ The MNMs are constructed for each time point by running MNM_construction.R in R 
 
 ### Ranking of URs
 
-The URs from the IPA predictions are ranked based on the number of cell types and time points in which they were predicted, by running UR_ranking.R in R 4.0. Input to this script are the UR predictions from IPA. The structure of the data should be the same as for MNM construction, with one subdirectory per time   
+The URs from the IPA predictions are ranked based on the number of cell types and time points in which they were predicted, by running UR_ranking.R in R 4.0. Input to this script are the UR predictions from IPA. The structure of the data should be the same as for MNM construction, with one subdirectory per time point. See 'Rscript UR_ranking.R --help' for more details. 
 
+>Rscript UR_ranking.R ../example_data/IPA_UR-prediction ../output
+
+<img src="https://user-images.githubusercontent.com/51739216/156146083-8c047e4f-f135-4b48-b9c9-d8ee52d10fcd.png" width="500" /> 
+Fig 3. Heatmap with rank-ordered URs in rows and all the cell types over all time points in columns.  
 
