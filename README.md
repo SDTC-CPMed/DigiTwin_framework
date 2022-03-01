@@ -89,7 +89,7 @@ The MNMs are constructed for each time point by running MNM_construction.R in R 
 >Rscript MNM_construction.R ../example_data/IPA_UR-prediction ../example_data/DEGs ../output
 
 <img src="https://user-images.githubusercontent.com/51739216/156147705-376f2547-e328-4a4c-9505-9c416da3aa36.png" width="500" /> 
-Fig 3. MNM at 0h, illustrated using cytoscape (https://cytoscape.org/).
+Fig 3. eg. MNM at 0h, illustrated using cytoscape (https://cytoscape.org/).
 
 ### Ranking of URs
 
