@@ -182,6 +182,7 @@ the following pipeline.
 
 1.  Creat a project (eg. SAR) in the Project Manager to upload the DEGs
     (differentially expressed genes)
+    
     <img src="https://user-images.githubusercontent.com/51739216/155988719-ef25e83b-24ca-4e51-bd9f-d9a4c15de186.png" width="300" />
 
 For each list of DEGs, perform step 2 - 8, for UR prediction in IPA. In
@@ -195,10 +196,12 @@ DEGs (based on lowest q-value) into the IPA analysis.
     “Expr Log Ratio” (LogFC) and “Expr False Discovery Rate” (q-val).
     Keep both LogFC and q-val as the same group, “observation 1”. ”Save”
     and name the dataset.
+    
     <img src="https://user-images.githubusercontent.com/51739216/155989006-ebb0b1b1-e2bb-4677-93b4-63a636739b6e.png" width="450" />
 
 3.  In the lower right corner, click “Analyze/Filter Dataset” and then
     “Core Analysis” to perform IPA analysis of the data.
+    
     <img src="https://user-images.githubusercontent.com/51739216/155743530-21a556a6-26d2-4e3c-95eb-de632dccec07.png" width="450" />
 
 4.  Click ”next”, to get to the settings.
