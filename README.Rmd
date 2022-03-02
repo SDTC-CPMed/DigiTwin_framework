@@ -4,33 +4,87 @@ Note that the R scripts are not developed to be executed from command line. We r
 
 # scRNA-seq analysis for construction of multicellular network models (MNM) and prioritization of upstream regulatory (UR) genes
 
+# Instructions for running the codes
+
+The project is divided into 3 main parts
+- [Data preparation, and analyses for UR prediction and MNM construction](#Data preparation, and analyses for UR prediction and MNM construction), which can be run by the script bin/main.R. 
+
+- [Ingenuity Pathway analysis](#Ingenuity Pathway analysis). The detailed instructions for running the analyses follow below.
+
+- [Construction of multicellular network models (MNMs) and ranking of URs](#Construction of multicellular network models (MNMs) and ranking of URs), which can be run by the script post_IPA.sh 
+
+
+
 ## Data preparation, and analyses for UR prediction and MNM construction
 
-<<<<<<< HEAD
-Run examples:  
->getSeq_3samples [path/input] [path_to_GenomeDir] [path/primary_assembly.genome.fa] [path/primary_assembly.annotation.gtf] 20000 
+The data can be processed by running the following script. The file creates the directory structure and calls the functions to run[Quality assesment and full matrix construction](#Quality assesment and full matrix construction), [Cell type analysis](#Cell type analysis) and [Differnetial expression analysis](#Differnetial expression analysis)
 
-where 20000 is the double number of cells expected to be extracted from analysis. The input to this script is the single cell sequencer output folder, which should contain a SampleSheet.csv file (see example_data/SampleSheet.csv) contaning the information about the run. The genome files are the ones created for STAR alignment. The output will be written to data/{user}/getSeq, so make sure to create this directory before running the extraction scripts. 
+```{eval = FALSE, show = TRUE}
+dir.create("data")
+dir.create("data/DEGS_with_Monocle")
+dir.create("data/DEGS_with_Monocle/Matrix_in")
+dir.create("data/DEGS_with_Monocle/Monocle_out")
+dir.create("data/DEGS_with_Monocle/Monocle_out_withFCs")
+dir.create("data/knn_smoothing")
+dir.create("data/RCA_out")
+dir.create("data/RCA_out/full_matrix")
+dir.create("data/RCA_references")
+dir.create("plot")
 
->getDgem [path/project_directory] /data/{user}/getSeq [run_ID] [sample_ID]  
->getdepth [path/project_directory] /data/{user}/getSeq [run_ID] [sample_ID]  
+### Read data from GSE180697 and save it to data folder
+filenames = c('data/GSE180697_SAR_patients_expression_matrix.csv.gz',
+              'data/GSE180697_Healthy_controls_expression_matrix.csv.gz')
 
-where sample_ID has to be the same as output sample name from getSeq_3samples. Sub-directories will be created in the project_directory for each run_ID and sample_ID, where the output files will be added. 
+### Preprocess the data and remove outliers
+source('sc_data_quality_sorting.R')
+HA = sc_data_quality_sorting(filenames[1])
+write.csv(HA, 'data/HA_min200genesPerCell_sorted_expression_matrix.csv', quote = F)
+HC = sc_data_quality_sorting(filenames[2])
+write.csv(HC, 'data/HC_min200genesPerCell_sorted_expression_matrix.csv', quote = F)
 
-See example_data_extraction.sh for an example on how to extract data from one sequencing run. 
+### Run knn smoothing
+#system(chmod u+x run_knn_smoothing.sh)
+system('./run_knn_smoothing.sh ')
 
-## Quality assesment and full matrix construction
-=======
+### Run cell typing
+source('RCA_reference_construction.R')
+source('RCA_cellType_identification.R')
+RCA_cellType_identification('HA')
+#RCA_cellType_identification('HC')
+
+### Run pre-DEG analysis
+source('pre-DEG_analysis.R')
+pre_DEG_analysis('HA')
+#pre_DEG_analysis('HC')
+
+### Run Monocle_v3_RAdata
+source('Monocle_v3_RAdata.r')
+Monocle_v3_RAdata('HA')
+#Monocle_v3_RAdata('HC')
+
+### Run sc_FC_zero_infl_neg-binomial
+source('sc_FC_zero-infl-neg-bionmial.R')
+sc_FC_zero_infl_neg_binomial('HA')
+#sc_FC_zero_infl_neg_binomial('HC')
+
+### Run plot_DEGs.R
+source('plot_DEGs.R')
+plots = plot_custom()
+pdf('plot/lognDEGs_over_time.pdf')
+plots[[1]]
+dev.off()
+pdf('plot/celltype_ratios_over_groups.pdf')
+plots[[2]]
+dev.off()
+```
+
 
 ### Quality assesment and full matrix construction
->>>>>>> 5b0075579befbf6756008768635955ea5ae89ee0
 
 To ensure good quality data for downstream analyses, it is recommended to remove poor quality cells from the analyses. Here, we define and keep the good quality cells as those having a minimum of 400 transcripts, 200 genes, and less than 20% mitochondrial genes. Due to the risk of duplicates in the library resulting in two or more cells sharing a cell barcode, it is also recommend to remove outliers, which can be based on empirical evaluation of the distributionan overestimation of transcripts count over the cells. 
 
-First, we combined the output files from getDgem into a matrix using full_sc-matrix_construction.R including some minimum quality cut-offs, whereafter we estimate the overall quality of the data and remove outliers using sc_data_quality_sorting.R. 
+The expected input is for this part is a matrix with genes in rows and cells in columns. The quality of the data and removal of the outliers is done using sc_data_quality_sorting.R
 
-1. full_sc-matrix_construction.R # Combine the matrices from all samples and set specific quality cut-offs
-2. sc_data_quality_sorting.R # Check the quality of the data and remove outliers
 
 ### Cell type analysis
 
@@ -61,6 +115,7 @@ Fig 1. log(number of DEGs) identified between allergen-stimulated and diluent-st
 
 <img src="https://user-images.githubusercontent.com/51739216/144604759-9677b860-46a9-4296-876b-eb5de3b69b1a.png" width="500" />  
 Fig 2. Cell type proportions in different groups of allergen-stimulated (A) and diluent-stimulated (D), as well as unstimulated control (C), samples from healthy individuals at the different time points.  
+
 
 ## Upstream Regulatory (UR) gene prediction in Ingenuity Pathway Analysis (IPA)
 
@@ -115,4 +170,8 @@ The URs from the IPA predictions are ranked based on the number of cell types an
 
 <img src="https://user-images.githubusercontent.com/51739216/156146083-8c047e4f-f135-4b48-b9c9-d8ee52d10fcd.png" width="500" /> 
 Fig 4. Heatmap with rank-ordered URs in rows and all the cell types over all time points in columns.  
+
+
+
+
 
