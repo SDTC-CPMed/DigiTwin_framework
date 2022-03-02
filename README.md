@@ -181,7 +181,7 @@ To reproduce the analyses for prediction of URs from our project, follow
 the following pipeline.
 
 1.  Creat a project (eg. SAR) in the Project Manager to upload the DEGs
-    (differentially expressed genes)
+    (differentially expressed genes).
     
     <img src="https://user-images.githubusercontent.com/51739216/155988719-ef25e83b-24ca-4e51-bd9f-d9a4c15de186.png" width="300" />
 
@@ -223,7 +223,7 @@ DEGs (based on lowest q-value) into the IPA analysis.
 
 8.  In the top tab tools, go to “Upstream Analysis” to show the UR
     prediction results. The results can be downloaded by clicking
-    <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />
+    <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />.
     
     <img src="https://user-images.githubusercontent.com/51739216/155744562-c6748942-bb6f-4fb7-b602-1b0be72e8aaf.png" width="450" />
 
