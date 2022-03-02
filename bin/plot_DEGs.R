@@ -15,11 +15,10 @@ library(scales)
 library(reshape2)
 
 
-plot_custom = function(){
+plot_custom = function(plot1, plot2){
 
   dir.data <- 'data/DEGS_with_Monocle/Monocle_out_withFCs/'
   dir.out.images <- 'plot/'
-  
   #### Count all DEGs for each cell type and timepoint
   nm <- list.files(path=dir.data)
   cells <- unique(sapply(strsplit(list.files(path=dir.data), '_'), '[[', 4))
@@ -51,13 +50,10 @@ plot_custom = function(){
   #ndata <- rename(ndata, day = variable)
   #ndata <- rename(ndata, log_nDEGs = value)
   ndata <- mutate(ndata, day = as.numeric(day))
-  newplot <- ggplot(ndata, aes(x = day, y = log_nDEGs, color = celltype, group = celltype)) +
+  plot1 <- ggplot(ndata, aes(x = day, y = log_nDEGs, color = celltype, group = celltype)) +
     geom_point() +
     geom_line()
-  pdf(paste(dir.out.images, '/lognDEGs_over_time.pdf', sep = ''))
-  newplot
-  dev.off()
-  
+
   ##############################################################################################
   #### Plot the distribution of different cell types for each separate timepoint and treatment
   library(plyr)
@@ -71,7 +67,6 @@ plot_custom = function(){
   X <- readRDS('data/RCA_out/full_matrix/HA_min200genesPerCell_sorted_ENTREZ_expression_matrix.knn-smooth_k14_und-rm_withCellTypes.rds')
   
   X[1:5,1:5]
-  
   M <- matrix(NA, ncol = 3, nrow = length(colnames(X)))
   M[,1] <- sapply(strsplit(colnames(X), '_'), '[[', 1)
   M[,2] <- sapply(strsplit(colnames(X), '_'), '[[', 3)
@@ -84,15 +79,13 @@ plot_custom = function(){
   df <- ddply(df,.(CellType, timepoint, treatment),nrow)
   colnames(df) <- c('CellType', 'timepoint', 'treatment', 'ratio')
   
-  newplot <- ggplot(df, aes(x=treatment, y=ratio, fill=CellType)) +
+  plot2 <- ggplot(df, aes(x=treatment, y=ratio, fill=CellType)) +
     geom_bar(stat="identity", position = "fill") +
     scale_y_continuous(labels = percent_format())+
     facet_grid(~timepoint) + theme_bw()
-  pdf(paste(dir.out.images, '/celltype_ratios_over_groups.pdf', sep = ''))
+  pdf(paste(dir.out.images, 'celltype_ratios_over_groups.pdf', sep = ''))
   
-  newplot
-  dev.off()
-  
-  
+
+  return(list(plot1, plot2))
 }
 
