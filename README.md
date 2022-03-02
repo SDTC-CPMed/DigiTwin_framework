@@ -205,6 +205,7 @@ DEGs (based on lowest q-value) into the IPA analysis.
     <img src="https://user-images.githubusercontent.com/51739216/155743530-21a556a6-26d2-4e3c-95eb-de632dccec07.png" width="450" />
 
 4.  Click ”next”, to get to the settings.
+    
     <img src="https://user-images.githubusercontent.com/51739216/155743696-ac146033-b553-44b1-a020-9ca9e8bae46d.png" width="350" />
 
 5.  In the settings. based on this dataset, define “General settings -
@@ -212,15 +213,18 @@ DEGs (based on lowest q-value) into the IPA analysis.
     “Tissues&Cell Lines” = All, and “Mutation” = All.
 
 6.  Run the analyses by “Run Analysis”.
+    
     <img src="https://user-images.githubusercontent.com/51739216/156144451-22be3f42-08d2-4698-abef-22737098cfe8.png" width="450" />
 
 7.  All the performed analyses can be found in the “SAR” project under
     “Analyses”. Choose one of the analyses to check the results.
+    
     <img src="https://user-images.githubusercontent.com/51739216/156144896-1f4c9511-02df-474c-a4f1-ba39ec1f67ca.png" width="300" />
 
 8.  In the top tab tools, go to “Upstream Analysis” to show the UR
     prediction results. The results can be downloaded by clicking
     <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />
+    
     <img src="https://user-images.githubusercontent.com/51739216/155744562-c6748942-bb6f-4fb7-b602-1b0be72e8aaf.png" width="450" />
 
 ## Construction of multicellular network models (MNMs) and ranking of URs
