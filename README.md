@@ -241,12 +241,16 @@ DEGs (based on lowest q-value) into the IPA analysis.
     <img src="https://user-images.githubusercontent.com/51739216/155744357-86857f73-8111-497d-a716-983ef5abe525.png" width="30" />.
     
     <img src="https://user-images.githubusercontent.com/51739216/155744562-c6748942-bb6f-4fb7-b602-1b0be72e8aaf.png" width="450" />
+    
+9.  For downstream codes to run smoothly, create a directory "data/IPA_UR-prediction", and one subdirectory per time point, eg. "UR_0h_HA_vs_HC". 
+    Note that the time point must be part of the sub-direcroty naming.
+    Save the output files from IPA into their respective sub-directories. Name them with "[celltype]_[timepoint]_[else].xls", eg. "Bcells_0h_HA_vs_HC.xls".
 
 ## Construction of multicellular network models (MNMs) and ranking of URs
 
 The post-IPA data can be processed by running the following script (maon_post_IPA.R). The file
-creates the directory structure and calls the functions to run [MNM construction](#mnm-construction), and 
-[Ranking of URs](#ranking-of-urs)
+creates the output directory structure and calls the functions to run [MNM construction](#mnm-construction), and 
+[Ranking of URs](#ranking-of-urs). 
 
 ``` eval
 dir.create("data/Multicellular_Network_Models")
