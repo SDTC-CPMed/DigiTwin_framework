@@ -244,11 +244,12 @@ DEGs (based on lowest q-value) into the IPA analysis.
     
 9.  For downstream codes to run smoothly, create a directory "data/IPA_UR-prediction", and one subdirectory per time point, eg. "UR_0h_HA_vs_HC". 
     Note that the time point must be part of the sub-direcroty naming.
-    Save the output files from IPA into their respective sub-directories. Name them with "[celltype]_[timepoint]_[else].xls", eg. "Bcells_0h_HA_vs_HC.xls".
+    Save the output files from IPA into their respective sub-directories. 
+    Name the files according to the following structure: "celltype_timepoint_otherInfo.xls", eg. "Bcells_0h_HA_vs_HC.xls".
 
 ## Construction of multicellular network models (MNMs) and ranking of URs
 
-The post-IPA data can be processed by running the following script (maon_post_IPA.R). The file
+The post-IPA data can be processed by running the following script (main_post_IPA.R). The file
 creates the output directory structure and calls the functions to run [MNM construction](#mnm-construction), and 
 [Ranking of URs](#ranking-of-urs). 
 
@@ -284,11 +285,15 @@ that the input directory comtaining the UR predictions from IPA includes
 one subdirectory per time point, which in turn should include only, but
 all, the files to construct the MNMs. Additionally, ensure that the
 directory containing the DEGs includes only, but all, the files for MNM
-construction. See ‘Rscript MNM_construction.R –help’ for more details.
+construction. See "MNM_construction.R" for more details.
 
-> Rscript MNM_construction.R ../example_data/IPA_UR-prediction
-> ../example_data/DEGs ../output
+Output: One .csv file per time point containing combined data from the 
+IPA UR-predictions and DEG analysis for each interacting 
+'source cell type'-UR-'target cell type' combination.  
 
+![image](https://user-images.githubusercontent.com/51739216/156577037-798b7bfb-24de-4a1d-9d36-7f14fb728fa3.png)
+
+Fig 3. Example output from MNM_construction.R
 
 ### Ranking of URs
 
@@ -296,8 +301,17 @@ The URs from the IPA predictions are ranked based on the number of cell
 types and time points in which they were predicted, by running
 UR_ranking.R in R 4.0. Input to this script are the UR predictions from
 IPA. The structure of the data should be the same as for MNM
-construction, with one subdirectory per time point. See ‘Rscript
-UR_ranking.R –help’ for more details.
+construction, with one subdirectory per time point. See
+"UR_ranking.R" for more details.
 
-> Rscript UR_ranking.R ../example_data/IPA_UR-prediction ../output
+Output: One .csv file containing a rank-ordered list of UR genes
+and the number of cell types and time point in which it was a predicted
+regulator.  
+
+![image](https://user-images.githubusercontent.com/51739216/156577494-bdc42df0-c9df-49b2-8e09-652a67943d69.png)
+
+Fig 4. Example output from UR_ranking.R. The top listed URs are predicted 
+in the highest number of cell types and time points, and are potentially 
+more important for disease compared to the low-ranked URs (at the bottom 
+of the file).  
 
