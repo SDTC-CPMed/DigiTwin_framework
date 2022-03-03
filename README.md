@@ -247,9 +247,7 @@ DEGs (based on lowest q-value) into the IPA analysis.
     
 **Note:** For downstream codes to run smoothly, create a directory "data/IPA_UR-prediction", and one subdirectory per time point, eg. "UR_0h_HA_vs_HC". 
 The time point must be part of the sub-direcroty naming.
-
 Save the output files from IPA into their respective sub-directories. 
-
 Name the files according to the following structure: "celltype_timepoint_otherInfo.xls", eg. "Bcells_0h_HA_vs_HC.xls".
 
 ***Table 1.** Example output from IPA UR prediction.*
