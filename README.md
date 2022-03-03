@@ -179,14 +179,16 @@ points and treatment groups (Fig 2), by plot_DEGs.R.
 4.  plot_DEGs.R # Plot the distribution of DEGs
 
 <img src="https://user-images.githubusercontent.com/51739216/144604687-54ee4a7c-b661-4ec7-927b-49d54efe2883.png" width="500" />  
-Fig 1. log(number of DEGs) identified between allergen-stimulated and
+
+***Fig 1.** log(number of DEGs) identified between allergen-stimulated and
 diluent-stimulated cells, for each cell type at the different time
-points.
+points.*
 
 <img src="https://user-images.githubusercontent.com/51739216/144604759-9677b860-46a9-4296-876b-eb5de3b69b1a.png" width="500" />  
-Fig 2. Cell type proportions in different groups of allergen-stimulated
+
+***Fig 2.** Cell type proportions in different groups of allergen-stimulated
 (A) and diluent-stimulated (D), as well as unstimulated control (C),
-samples from healthy individuals at the different time points.
+samples from healthy individuals at the different time points.*
 
 ## Upstream Regulatory (UR) gene prediction in Ingenuity Pathway Analysis (IPA)
 
@@ -248,7 +250,7 @@ DEGs (based on lowest q-value) into the IPA analysis.
     Save the output files from IPA into their respective sub-directories. 
     Name the files according to the following structure: "celltype_timepoint_otherInfo.xls", eg. "Bcells_0h_HA_vs_HC.xls".
 
-Table 1. Example output from IPA UR prediction.  
+***Table 1.** Example output from IPA UR prediction.*
 
 ![image](https://user-images.githubusercontent.com/51739216/156583602-760e6e9c-5f34-4d0c-b12d-f6dd9a901a7f.png)
 
@@ -296,7 +298,7 @@ Output: One .csv file per time point containing combined data from the
 IPA UR-predictions and DEG analysis for each interacting 
 'source cell type'-UR-'target cell type' combination.  
 
-Table 2. Example output from MNM_construction.R
+***Table 2.** Example output from MNM_construction.R*
 
 ![image](https://user-images.githubusercontent.com/51739216/156578941-7ba75872-b477-4ecd-9a04-577f31f320d3.png)
 
@@ -313,10 +315,10 @@ Output: One .csv file containing a rank-ordered list of UR genes
 and the number of cell types and time point in which it was a predicted
 regulator.  
 
-Table 3. Example output from UR_ranking.R. The top listed URs are predicted 
+***Table 3.** Example output from UR_ranking.R. The top listed URs are predicted 
 in the highest number of cell types and time points, and are potentially 
 more important for disease compared to the low-ranked URs (at the bottom 
-of the file).  
+of the file).*  
 
 ![image](https://user-images.githubusercontent.com/51739216/156577494-bdc42df0-c9df-49b2-8e09-652a67943d69.png)
 
