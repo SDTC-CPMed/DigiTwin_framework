@@ -244,10 +244,32 @@ DEGs (based on lowest q-value) into the IPA analysis.
 
 ## Construction of multicellular network models (MNMs) and ranking of URs
 
-To run the whole pipeline, on the example data-set, after IPA UR
-prediction, run post_IPA.sh
+The post-IPA data can be processed by running the following script (maon_post_IPA.R). The file
+creates the directory structure and calls the functions to run [MNM costruction](#MNM costruction), and 
+[UR prioritization](#UR prioritization)
 
-> ./post_IPA.sh
+``` eval
+dir.create("data/Multicellular_Network_Models")
+dir.create("data/UR-rank")
+
+
+### MNM construction
+source('MNM_construction.R')
+MNM_construction('data/IPA_UR-prediction', 
+                 'data/DEGS_with_Monocle/Monocle_out_withFCs', 
+                 'data/Multicellular_Network_Models')
+### MNM costruction, specific time point
+# MNM_construction('data/IPA_UR-prediction', 
+#                  'data/DEGS_with_Monocle/Monocle_out_withFCs', 
+#                  'data/Multicellular_Network_Models',
+#                  time_points = '3D')
+
+
+### UR prioritization
+source('UR_ranking.R')
+UR_ranking('data/IPA_UR-prediction', 'data/UR-rank')
+
+```
 
 ### MNM construction
 
@@ -263,9 +285,6 @@ construction. See ‘Rscript MNM_construction.R –help’ for more details.
 > Rscript MNM_construction.R ../example_data/IPA_UR-prediction
 > ../example_data/DEGs ../output
 
-<img src="https://user-images.githubusercontent.com/51739216/156147705-376f2547-e328-4a4c-9505-9c416da3aa36.png" width="500" />
-Fig 3. eg. MNM at 0h, illustrated using cytoscape
-(<https://cytoscape.org/>).
 
 ### Ranking of URs
 
@@ -278,7 +297,3 @@ UR_ranking.R –help’ for more details.
 
 > Rscript UR_ranking.R ../example_data/IPA_UR-prediction ../output
 
-<img src="https://user-images.githubusercontent.com/51739216/156146083-8c047e4f-f135-4b48-b9c9-d8ee52d10fcd.png" width="500" />
-
-Fig 4. Heatmap with rank-ordered URs in rows and all the cell types over
-all time points in columns.
