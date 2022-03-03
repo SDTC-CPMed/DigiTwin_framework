@@ -2,12 +2,12 @@ dir.create("data/Multicellular_Network_Models")
 dir.create("data/UR-rank")
 
 
-### UR prioritization
+### MNM construction
 source('MNM_construction.R')
 MNM_construction('data/IPA_UR-prediction', 
                  'data/DEGS_with_Monocle/Monocle_out_withFCs', 
                  'data/Multicellular_Network_Models')
-### UR prioritization, specific time point
+### MNM construction, specific time point
 # MNM_construction('data/IPA_UR-prediction', 
 #                  'data/DEGS_with_Monocle/Monocle_out_withFCs', 
 #                  'data/Multicellular_Network_Models',
