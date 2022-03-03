@@ -1,12 +1,9 @@
 README
 ================
 
-Below scripts works using R 3.4, R 4.0 and python 3.7.4.
-
-Note that the R scripts are not developed to be executed from command
-line. We recommend using RStudio for running these scripts.
-Modifications to these codes may be needed, to set input file
-directories, sample names, and other project specific information.
+Note that the scripts are developed based on project specific questions. 
+To adapt them towards your own data and questions, some modifications may 
+be needed, in which case we recommend RStudio.
 
 # scRNA-seq analysis for construction of multicellular network models (MNM) and prioritization of upstream regulatory (UR) genes
 
@@ -17,6 +14,8 @@ The project is divided into 3 main parts
 -   [Data preparation, and analyses for UR prediction and MNM
     construction](#data-preparation-and-analyses-for-ur-prediction-and-mnm-construction),
     which can be run by the script bin/main.R.
+    
+    These scripts were developed in R 3.4 and python 3.7.4
 
 -   [Ingenuity Pathway
     analysis](#upstream-regulatory-ur-gene-prediction-in-ingenuity-pathway-analysis-IPA).
@@ -24,7 +23,9 @@ The project is divided into 3 main parts
 
 -   [Construction of multicellular network models (MNMs) and ranking of
     URs](#construction-of-multicellular-network-models-mnms-and-ranking-of-urs),
-    which can be run by the script post_IPA.sh
+    which can be run by the script main_post_IPA.sh
+    
+    These scripts were developed in # 4.0. 
 
 ## Data preparation, and analyses for UR prediction and MNM construction
 
