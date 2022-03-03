@@ -19,6 +19,7 @@
 #' @param dir.data E.g., data/IPA_UR-prediction
 #' @param dir.degs E.g., data/DEGS_with_Monocle/Monocle_out_withFCs
 #' @param dir.out E.g., data/Multicellular_Network_Models
+#' @param time_points = c('0h', '12h', '1D', '2D', '3D', '5D', '7D')
 #' 
 #' @return no return, just saves the files into data folder
 #' @export
