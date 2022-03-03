@@ -58,30 +58,42 @@ write.csv(HA, 'data/HA_min200genesPerCell_sorted_expression_matrix.csv', quote =
 HC = sc_data_quality_sorting(filenames[2])
 write.csv(HC, 'data/HC_min200genesPerCell_sorted_expression_matrix.csv', quote = F)
 
+
+
+
 ### Run knn smoothing
 #system(chmod u+x run_knn_smoothing.sh)
+# Code by https://github.com/yanailab/knn-smoothing
 system('./run_knn_smoothing.sh ')
+
+
 
 ### Run cell typing
 source('RCA_reference_construction.R')
 source('RCA_cellType_identification.R')
 RCA_cellType_identification('HA')
-#RCA_cellType_identification('HC')
+RCA_cellType_identification('HC')
 
 ### Run pre-DEG analysis
 source('pre-DEG_analysis.R')
 pre_DEG_analysis('HA')
-#pre_DEG_analysis('HC')
+pre_DEG_analysis('HC')
 
 ### Run Monocle_v3_RAdata
 source('Monocle_v3_RAdata.r')
-Monocle_v3_RAdata('HA')
-#Monocle_v3_RAdata('HC')
+
+#Type of analysis could be 'HA_vs_HC' for DEGs between healthy and sick,
+#and 'HA' or 'HC' for dilutant vs allergen challenged
+Type_of_Analyses = 'HA_vs_HC'
+Monocle_v3_RAdata(Type_of_Analyses)
+
+
 
 ### Run sc_FC_zero_infl_neg-binomial
 source('sc_FC_zero-infl-neg-bionmial.R')
-sc_FC_zero_infl_neg_binomial('HA')
-#sc_FC_zero_infl_neg_binomial('HC')
+sc_FC_zero_infl_neg_binomial(Type_of_Analyses)
+
+
 
 ### Run plot_DEGs.R
 source('plot_DEGs.R')
@@ -89,8 +101,11 @@ plots = plot_custom()
 pdf('plot/lognDEGs_over_time.pdf')
 plots[[1]]
 dev.off()
-pdf('plot/celltype_ratios_over_groups.pdf')
+pdf('plot/HA_celltype_ratios_over_groups.pdf')
 plots[[2]]
+dev.off()
+pdf('plot/HC_celltype_ratios_over_groups.pdf')
+plots[[3]]
 dev.off()
 ```
 

@@ -12,18 +12,48 @@
 library('monocle')
 library('reshape2')
 library(R.utils)
+library(dplyr)
 
 
-
-Monocle_v3_RAdata = function(tissue){
+Monocle_v3_RAdata = function(type){
   dir.data <- 'data/DEGS_with_Monocle/Matrix_in/'
   dir.out <- 'data/DEGS_with_Monocle/Monocle_out/'
   
-  
-  
-  
   ## load data:
-  scrna = read.csv(paste(dir.data, tissue, '_ENTREZ_expression_matrix.csv', sep = ''), sep = ' ', row.names = 1)
+  if(type == 'HA_vs_HC'){
+    infiles <- list.files(dir.data)
+    print('aaa')
+    HA_in <- read.csv(paste(dir.data, 'HA_ENTREZ_expression_matrix.csv', sep = ''), sep = ' ', row.names = 1)
+    HC_in <- read.csv(paste(dir.data, 'HC_ENTREZ_expression_matrix.csv', sep = ''), sep = ' ', row.names = 1)
+    print('bbb')
+    colnames(HA_in) <- paste('HA', colnames(HA_in), sep = '_')
+    colnames(HC_in) <- paste('HC', colnames(HC_in), sep = '_')
+    HA_in$'celltypes' <- rownames(HA_in)
+    HC_in$'celltypes' <- rownames(HC_in)
+    scrna = full_join(HA_in, HC_in)
+    remove(HA_in, HC_in, infiles)
+    rownames(scrna) <- scrna$celltypes
+    scrna <- scrna[,-grep('celltypes', colnames(scrna))]
+    scrna[1:5,1:5]
+    
+    ## SAR remove NonChallenged cells
+    scrna <- scrna[,!grepl('_D_', colnames(scrna))]
+    unique(sort(sapply(strsplit(colnames(scrna), '_'), '[[', 4)))
+    colnames(scrna) <- gsub('_day1_', '_1D_', colnames(scrna))
+    colnames(scrna) <- gsub('_day2_', '_2D_', colnames(scrna))
+    colnames(scrna) <- gsub('_day3_', '_3D_', colnames(scrna))
+    colnames(scrna) <- gsub('_day5_', '_5D_', colnames(scrna))
+    colnames(scrna) <- gsub('_day7_', '_7D_', colnames(scrna))
+    unique(sort(sapply(strsplit(colnames(scrna), '_'), '[[', 2)))
+    
+    ## write matrix to out
+    write.table(scrna,paste(dir.data, type, '_ENTREZ_expression_matrix.csv' ,sep=''), sep = ' ', col.names = NA, quote = FALSE)
+  } else{
+    scrna = read.csv(paste(dir.data, type, '_ENTREZ_expression_matrix.csv', sep = ''), sep = ' ', row.names = 1)
+  }
+  
+  print('loaded')
+  
 
   scrna[1:5,1:5]
   
@@ -32,18 +62,31 @@ Monocle_v3_RAdata = function(tissue){
   # remove the cells which are not included
   
   ### SAR remove timepoint 0 - for allergen challenged vs diluent challenged calculations
-  scrna <- scrna[,!grepl('_0h_C_', colnames(scrna))]
+  if(type != 'HA_vs_HC'){
+    scrna <- scrna[,!grepl('_0h_C_', colnames(scrna))]
+  }
   
-  ## Prepare groups information
-  pd = data.frame(keys=colnames(scrna))
-  pd$keys2 = sapply(strsplit(colnames(scrna),'__'),function(Z) Z[1]) 
-  pd$kosz = sapply(strsplit(pd$keys2,'_'),function(Z) Z[1]) 
-  pd$sampleSource =  sapply(strsplit(pd$keys2,'_'), '[', 3) # eg tissue or timepoint 
-  pd$celltype = sapply(pd$kosz, function(x) substr(x,1,nchar(x))) # eg CD4
-  pd$state = sapply(strsplit(pd$keys2,'_'), '[', 4) # eg RA vs healthy 
-  pd$sampleId = sapply(strsplit(pd$keys2,'_'),function(Z) Z[length(Z)]) # cellular barcode 
-  pd$kosz = NULL
-  rownames(pd) = colnames(scrna)
+  if(type == 'HA_vs_HC'){
+     ## for SAR HC vs HA data
+     pd = data.frame(keys=colnames(scrna))
+     pd$keys2 = sapply(strsplit(colnames(scrna),'__'),function(Z) Z[1])
+     pd$sampleSource =  sapply(strsplit(pd$keys2,'_'), '[', 4) # eg tissue or timepoint
+     pd$celltype = sapply(strsplit(pd$keys2,'_'),function(Z) Z[2])
+     sapply(pd$kosz, function(x) substr(x,1,nchar(x))) # eg CD4
+     pd$state = sapply(strsplit(pd$keys2,'_'), '[', 1) # eg RA vs healthy
+     rownames(pd) = colnames(scrna)
+  } else {
+    ## Prepare groups information
+    pd = data.frame(keys=colnames(scrna))
+    pd$keys2 = sapply(strsplit(colnames(scrna),'__'),function(Z) Z[1]) 
+    pd$kosz = sapply(strsplit(pd$keys2,'_'),function(Z) Z[1]) 
+    pd$sampleSource =  sapply(strsplit(pd$keys2,'_'), '[', 3) # eg tissue or timepoint 
+    pd$celltype = sapply(pd$kosz, function(x) substr(x,1,nchar(x))) # eg CD4
+    pd$state = sapply(strsplit(pd$keys2,'_'), '[', 4) # eg RA vs healthy 
+    pd$sampleId = sapply(strsplit(pd$keys2,'_'),function(Z) Z[length(Z)]) # cellular barcode 
+    pd$kosz = NULL
+    rownames(pd) = colnames(scrna)
+  }
   
   ### ### #### ### ###
   ## START MONOCLE: ##
@@ -72,18 +115,18 @@ Monocle_v3_RAdata = function(tissue){
   
   ## GET DEGs:
   ## unchallenged vs challenged
+
   ucelltypes = unique(pData(scrna)$celltype)
   ucelltypes = ucelltypes[c(1:4,6:10,5)] ### NOTE: do Th2, Th17 and NK last thing
   usource = unique(pData(scrna)$sampleSource)
   for (i in 1:length(usource)){
-    for (z  in 1 : length(ucelltypes)){
-
+    for (z  in 1:length(ucelltypes)){
       if (length(grep('TRUE', pData(scrna)$celltype == ucelltypes[z] &  
                       pData(scrna)$sampleSource == usource[i] & 
-                      pData(scrna)$state == 'D')) <= 2 |  
+                      pData(scrna)$state == unique(pData(scrna)$state)[1])) <= 2 |  
           length(grep('TRUE', pData(scrna)$celltype == ucelltypes[z] &  
                       pData(scrna)$sampleSource == usource[i] & 
-                      pData(scrna)$state == 'A')) <= 2){ 
+                      pData(scrna)$state == unique(pData(scrna)$state)[2])) <= 2){ 
         print(paste(ucelltypes[z], usource[i], "sample size <= 2 in one or both states", sep = ' ')) 
         next
       }
@@ -98,11 +141,12 @@ Monocle_v3_RAdata = function(tissue){
       diff_test_res <- differentialGeneTest(scrna_subset,
                                             fullModelFormulaStr = "~state", cores = 30)
   
-      write.table(diff_test_res,paste(dir.out,'Monocle_DEGs_', tissue, '_',ucelltypes[z],'_',usource[i],'_AllergenChallenged_vs_NonChallenged.txt',sep=''),row.names=F)
+      write.table(diff_test_res,paste(dir.out,'Monocle_DEGs_', type, '_',ucelltypes[z],'_',usource[i],'_AllergenChallenged_vs_NonChallenged.txt',sep=''),row.names=F)
 
       rm(list=c('scrna_subset','diff_test_res')) 
     }
   }
+  
   
   ## gzip out
   filename <- list.files(dir.out, pattern = '.txt', full.names = T) 

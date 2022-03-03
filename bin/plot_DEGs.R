@@ -15,7 +15,7 @@ library(scales)
 library(reshape2)
 
 
-plot_custom = function(plot1, plot2){
+plot_custom = function(){
 
   dir.data <- 'data/DEGS_with_Monocle/Monocle_out_withFCs/'
   dir.out.images <- 'plot/'
@@ -83,9 +83,28 @@ plot_custom = function(plot1, plot2){
     geom_bar(stat="identity", position = "fill") +
     scale_y_continuous(labels = percent_format())+
     facet_grid(~timepoint) + theme_bw()
-  pdf(paste(dir.out.images, 'celltype_ratios_over_groups.pdf', sep = ''))
   
+  X <- readRDS('data/RCA_out/full_matrix/HC_min200genesPerCell_sorted_ENTREZ_expression_matrix.knn-smooth_k14_und-rm_withCellTypes.rds')
+  
+  X[1:5,1:5]
+  M <- matrix(NA, ncol = 3, nrow = length(colnames(X)))
+  M[,1] <- sapply(strsplit(colnames(X), '_'), '[[', 1)
+  M[,2] <- sapply(strsplit(colnames(X), '_'), '[[', 3)
+  M[,3] <- sapply(strsplit(colnames(X), '_'), '[[', 4)
+  colnames(M) <- c('CellType', 'timepoint', 'treatment')
+  head(M)
+  ### Create data frame 'Mdf' with unique rows containing column 'value' 
+  ### specifying the ratio of the cell type in its certain timepoint and condition.
+  df <- as.data.frame(M)
+  df <- ddply(df,.(CellType, timepoint, treatment),nrow)
+  colnames(df) <- c('CellType', 'timepoint', 'treatment', 'ratio')
+  
+  plot3 <- ggplot(df, aes(x=treatment, y=ratio, fill=CellType)) +
+    geom_bar(stat="identity", position = "fill") +
+    scale_y_continuous(labels = percent_format())+
+    facet_grid(~timepoint) + theme_bw()
 
-  return(list(plot1, plot2))
+
+  return(list(plot1, plot2, plot3))
 }
 

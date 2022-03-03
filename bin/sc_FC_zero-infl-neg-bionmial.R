@@ -14,17 +14,20 @@ library(doParallel)
 library(dplyr)
 
 
-sc_FC_zero_infl_neg_binomial = function(tissue){
-  mat.data <- list.files('data/DEGS_with_Monocle/Matrix_in/', full.names = T)
+sc_FC_zero_infl_neg_binomial = function(type){
+  mat.data <- 'data/DEGS_with_Monocle/Matrix_in/'
   dir.data <- 'data/DEGS_with_Monocle/Monocle_out/'
   dir.out <- 'data/DEGS_with_Monocle/Monocle_out_withFCs/'
   
   ### load the data
-  X <- read.csv(mat.data, sep = ' ', row.names = 1)
+  X <- read.csv(paste(mat.data, type, '_ENTREZ_expression_matrix.csv', sep = ''), sep = ' ', row.names = 1)
   X[1:5,1:5]
   
+  
   ### SAR remove timepoint 0
-  X <- X[,!grepl('_0h_C_', colnames(X))]
+  if(type != 'HA_vs_HC'){
+    X <- X[,!grepl('_0h_C_', colnames(X))]
+  }
   # ### SAR remove unchallenged group D
   # X <- X[,!grepl('_D_', colnames(X))]
   
@@ -34,7 +37,7 @@ sc_FC_zero_infl_neg_binomial = function(tissue){
   
   ######### define functions #########
   f_deg <- function(cllx, timepointx){
-    nfit <- paste('Monocle_DEGs_', sampleid, '_', cllx, '_', timepointx, 
+    nfit <- paste('Monocle_DEGs_', type, '_', cllx, '_', timepointx, 
                   '_AllergenChallenged_vs_NonChallenged.txt.gz', sep = '')
     if (length(list.files(dir.data, pattern = nfit)) == 1){
       nfit <- paste(dir.data, nfit, sep = '')
@@ -170,7 +173,7 @@ sc_FC_zero_infl_neg_binomial = function(tissue){
       D <- left_join(D, ref, by = c('gene_short_name' = 'GeneID'))
       D <- f_sort(D) ## Duplicates and zeros are here removed
       nFIT <- paste(dir.out, 
-                    "/degs_monocle_", sampleid,  '_', cllx, '_', timepointx, 
+                    "/degs_monocle_", type,  '_', cllx, '_', timepointx, 
                     "_AllergenChallenged_vs_NonChallenged.txt", sep = '') # Update dependent on group identifier
       outf <- D[,c('Symbol', 'FC', 'qval', 'mean_expr_challenged', 'mean_expr_unchallenged')] # Update dependent on group identifier
       outf$FC <- as.numeric(outf$FC)
