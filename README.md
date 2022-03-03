@@ -248,6 +248,10 @@ DEGs (based on lowest q-value) into the IPA analysis.
     Save the output files from IPA into their respective sub-directories. 
     Name the files according to the following structure: "celltype_timepoint_otherInfo.xls", eg. "Bcells_0h_HA_vs_HC.xls".
 
+Table 1. Example output from IPA UR prediction.  
+
+![image](https://user-images.githubusercontent.com/51739216/156583602-760e6e9c-5f34-4d0c-b12d-f6dd9a901a7f.png)
+
 ## Construction of multicellular network models (MNMs) and ranking of URs
 
 The post-IPA data can be processed by running the following script (main_post_IPA.R). The file
@@ -292,9 +296,9 @@ Output: One .csv file per time point containing combined data from the
 IPA UR-predictions and DEG analysis for each interacting 
 'source cell type'-UR-'target cell type' combination.  
 
-![image](https://user-images.githubusercontent.com/51739216/156578941-7ba75872-b477-4ecd-9a04-577f31f320d3.png)
+Table 2. Example output from MNM_construction.R
 
-Fig 3. Example output from MNM_construction.R
+![image](https://user-images.githubusercontent.com/51739216/156578941-7ba75872-b477-4ecd-9a04-577f31f320d3.png)
 
 ### Ranking of URs
 
@@ -309,10 +313,11 @@ Output: One .csv file containing a rank-ordered list of UR genes
 and the number of cell types and time point in which it was a predicted
 regulator.  
 
-![image](https://user-images.githubusercontent.com/51739216/156577494-bdc42df0-c9df-49b2-8e09-652a67943d69.png)
-
-Fig 4. Example output from UR_ranking.R. The top listed URs are predicted 
+Table 3. Example output from UR_ranking.R. The top listed URs are predicted 
 in the highest number of cell types and time points, and are potentially 
 more important for disease compared to the low-ranked URs (at the bottom 
 of the file).  
+
+![image](https://user-images.githubusercontent.com/51739216/156577494-bdc42df0-c9df-49b2-8e09-652a67943d69.png)
+
 
