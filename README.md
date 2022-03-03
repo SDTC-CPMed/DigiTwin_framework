@@ -246,7 +246,7 @@ DEGs (based on lowest q-value) into the IPA analysis.
 
 The post-IPA data can be processed by running the following script (maon_post_IPA.R). The file
 creates the directory structure and calls the functions to run [MNM construction](#mnm-construction), and 
-[UR prioritization](#UR prioritization)
+[Ranking of URs](#ranking-of-urs)
 
 ``` eval
 dir.create("data/Multicellular_Network_Models")
