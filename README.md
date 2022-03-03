@@ -291,7 +291,7 @@ Output: One .csv file per time point containing combined data from the
 IPA UR-predictions and DEG analysis for each interacting 
 'source cell type'-UR-'target cell type' combination.  
 
-![image](https://user-images.githubusercontent.com/51739216/156577037-798b7bfb-24de-4a1d-9d36-7f14fb728fa3.png)
+![image](https://user-images.githubusercontent.com/51739216/156578941-7ba75872-b477-4ecd-9a04-577f31f320d3.png)
 
 Fig 3. Example output from MNM_construction.R
 
