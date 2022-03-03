@@ -245,7 +245,7 @@ DEGs (based on lowest q-value) into the IPA analysis.
 ## Construction of multicellular network models (MNMs) and ranking of URs
 
 The post-IPA data can be processed by running the following script (maon_post_IPA.R). The file
-creates the directory structure and calls the functions to run [MNM costruction](#MNM costruction), and 
+creates the directory structure and calls the functions to run [MNM construction](#MNM construction), and 
 [UR prioritization](#UR prioritization)
 
 ``` eval
