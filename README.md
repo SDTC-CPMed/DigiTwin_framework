@@ -266,6 +266,13 @@ The post-IPA data can be processed by running the following script (main_post_IP
 creates the output directory structure and calls the functions to run [MNM construction](#mnm-construction), and 
 [Ranking of URs](#ranking-of-urs). 
 
+Input to this code are the output files from [Ingenuity Pathway analysis](#upstream-regulatory-ur-gene-prediction-in-ingenuity-pathway-analysis-IPA) 
+and the output files from the [Differnetial expression analysis](#differnetial-expression-analysis). The files can be found in "data/IPA_UR-prediction"
+and in "data/DEGS_with_Monocle/Monocle_out_withFCs", respectively. Example data to run the codes can be found in "example_data/IPA_UR-prediction" 
+(example data from IPA) and in "example_data/DEGs" (example lists of DEGs).
+
+The output consists of two files, "" and ""
+
 ``` eval
 dir.create("data/Multicellular_Network_Models")
 dir.create("data/UR-rank")
@@ -298,7 +305,7 @@ UR_ranking('../example_data/IPA_UR-prediction', 'data/UR-rank')
 The MNMs are constructed for each time point by running
 MNM_construction.R in R 4.0. Input to this script are the UR predictions
 from IPA and the list of DEGs. For the script to run smoothly, ensure
-that the input directory comtaining the UR predictions from IPA includes
+that the input directory containing the UR predictions from IPA includes
 one subdirectory per time point, which in turn should include only, but
 all, the files to construct the MNMs. Additionally, ensure that the
 directory containing the DEGs includes only, but all, the files for MNM
