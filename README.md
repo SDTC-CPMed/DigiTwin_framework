@@ -272,8 +272,7 @@ and in "data/DEGS_with_Monocle/Monocle_out_withFCs", respectively. Example data 
 (example data from IPA) and in "example_data/DEGs" (example lists of DEGs).
 
 The output consists of multiple files from MNM construction, one for each time point, named as "0h_UR_interactions.csv" 
-(see example [Table 2](#table-2.-example-output-from-mnm_construction.r))
-(see example [Table 2](#table-2))
+(see example [Table 2](#mnm-construction))
 and one file containing rank-ordered URs "UR_ranking.csv"
 
 ``` eval
