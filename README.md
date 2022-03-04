@@ -273,7 +273,7 @@ and in "data/DEGS_with_Monocle/Monocle_out_withFCs", respectively. Example data 
 
 The output consists of multiple files from MNM construction, one for each time point, named as "0h_UR_interactions.csv" 
 (see example [Table 2](#mnm-construction))
-and one file containing rank-ordered URs "UR_ranking.csv"
+and one file containing rank-ordered URs "UR_ranking.csv" (example [Table 3](#ranking-of-urs)).
 
 ``` eval
 dir.create("data/Multicellular_Network_Models")
