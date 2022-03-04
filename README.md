@@ -241,7 +241,7 @@ for UR prediction in IPA.**
 
 7.  All the performed analyses can be found in the “SAR” project under
     “Analyses”. To see and export the results for further analyses, 
-    choose the current analysis.
+    choose your current analysis.
     
     <img src="https://user-images.githubusercontent.com/51739216/156144896-1f4c9511-02df-474c-a4f1-ba39ec1f67ca.png" width="300" />
 
