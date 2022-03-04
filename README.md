@@ -38,9 +38,10 @@ time point, and each comparision
 [Differnetial expression analysis](#differnetial-expression-analysis) (Example [Table 1](#differnetial-expression-analysis)). 
 These output files can be found in "data/DEGS_with_Monocle/Monocle_out_withFCs".
 
-Additional output file from intermediate steps include; one quality sorted matrix per input file (eg. "data/HA_min200genesPerCell_sorted_expression_matrix.csv"),
-one knn-smoothed matrix per input file (eg. "data/knn_smoothing/HA_min200genesPerCell_sorted_expression_matrix.knn-smooth_k14.csv"),
-one matrix with cell type identities per input file (eg. "")
+Additional output file from intermediate steps include; 
+* one quality sorted matrix per input file (eg. "data/HA_min200genesPerCell_sorted_expression_matrix.csv"),
+* one knn-smoothed matrix per input file (eg. "data/knn_smoothing/HA_min200genesPerCell_sorted_expression_matrix.knn-smooth_k14.csv"),
+* one matrix with cell type identities per input file (eg. "")
 
 Note that the scripts are developed based on project specific questions. 
 To adapt them towards your own data and questions, some modifications may 
