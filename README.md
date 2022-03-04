@@ -197,7 +197,7 @@ points.*
 (A) and diluent-stimulated (D), as well as unstimulated control (C),
 samples from healthy individuals at the different time points.*
 
-***Table 1.** Example output file from sc_FC_zero-infl-neg-bionmial.R*
+***Table 1.** Example output file from sc_FC_zero-infl-neg-bionmial.R. The file only include significant DEGs (q-val < 0.05).*
 
 ![image](https://user-images.githubusercontent.com/51739216/156749464-69103745-4151-4ea4-93c8-227fa7603d48.png)
 
