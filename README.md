@@ -29,7 +29,7 @@ The project is divided into 3 main parts
 
 ## Data preparation, and analyses for UR prediction and MNM construction
 
-The data can be processed by running the following script. The file
+The data can be processed by running the following script. The expected data inputs are two csv.gz tables with cells in columns and genes in rows, where one corresponds to patients and the other to healthy controls. The data can be found at https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE180697 and we recommend saving them in bin/data folder. The script below 
 creates the directory structure and calls the functions to run [Quality
 assesment and full matrix
 construction](#quality-assesment-and-full-matrix-construction), [Cell

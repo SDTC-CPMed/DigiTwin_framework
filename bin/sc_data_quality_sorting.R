@@ -3,7 +3,7 @@
 
 #' Check the quality of the data and remove outliers
 #' 
-#' @param filename The filename of the txt.gz input file with cells in columns and genes in rows
+#' @param filename The filename of the csv.gz input file with cells in columns and genes in rows
 #' 
 #' @return The expression matrix without outliers
 #' @export
@@ -13,7 +13,7 @@ library(Seurat)
 
 sc_data_quality_sorting <- function(filename){
   
-  X <- read.table(filename, header = T, sep = '\t', row.names = 1)
+  X <- read.csv(filename, header = T, sep = ',', row.names = 1)
   X[1:5,1:5]
   
   X.seu <- CreateSeuratObject(X, min.cells = 3, min.features = 200)
