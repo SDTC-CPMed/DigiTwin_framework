@@ -21,7 +21,7 @@ The project is divided into 3 main parts
     URs](#construction-of-multicellular-network-models-mnms-and-ranking-of-urs),
     which can be run by the script main_post_IPA.sh
     
-    These scripts were developed in # 4.0. 
+    These scripts were developed in R 4.0. 
 
 ## Data preparation, and analyses for UR prediction and MNM construction
 
@@ -70,15 +70,10 @@ write.csv(HA, 'data/HA_min200genesPerCell_sorted_expression_matrix.csv', quote =
 HC = sc_data_quality_sorting(filenames[2])
 write.csv(HC, 'data/HC_min200genesPerCell_sorted_expression_matrix.csv', quote = F)
 
-
-
-
 ### Run knn smoothing
 #system(chmod u+x run_knn_smoothing.sh)
 # Code by https://github.com/yanailab/knn-smoothing
 system('./run_knn_smoothing.sh ')
-
-
 
 ### Run cell typing
 source('RCA_reference_construction.R')
@@ -99,13 +94,9 @@ source('Monocle_v3_RAdata.r')
 Type_of_Analyses = 'HA_vs_HC'
 Monocle_v3_RAdata(Type_of_Analyses)
 
-
-
 ### Run sc_FC_zero_infl_neg-binomial
 source('sc_FC_zero-infl-neg-bionmial.R')
 sc_FC_zero_infl_neg_binomial(Type_of_Analyses)
-
-
 
 ### Run plot_DEGs.R
 source('plot_DEGs.R')
