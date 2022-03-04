@@ -33,15 +33,14 @@ type analysis](#cell-type-analysis) and [Differnetial expression
 analysis](#differnetial-expression-analysis)
 
 The main output from this script are lists of DEGs (one list for each cell type, 
-time point, and each comparision 
-("HA vs HC" and "allergenChallenged vs nonChallenged")) from the 
+and time point), comparing "HA vs HC" (compares allergen challenged samples between allergic patients and healthy controls) from the 
 [Differnetial expression analysis](#differnetial-expression-analysis) (Example [Table 1](#differnetial-expression-analysis)). 
 These output files can be found in "data/DEGS_with_Monocle/Monocle_out_withFCs".
 
 Additional output file from intermediate steps include; 
-* one quality sorted matrix per input file (eg. "data/HA_min200genesPerCell_sorted_expression_matrix.csv"),
-* one knn-smoothed matrix per input file (eg. "data/knn_smoothing/HA_min200genesPerCell_sorted_expression_matrix.knn-smooth_k14.csv"),
-* one matrix with cell type identities per input file (eg. "")
+* One quality sorted matrix per input file (eg. "data/HA_min200genesPerCell_sorted_expression_matrix.csv"),
+* One knn-smoothed matrix per input file (eg. "data/knn_smoothing/HA_min200genesPerCell_sorted_expression_matrix.knn-smooth_k14.csv"),
+* One Rdataframe (.rds) file, containing the knn-smoothed matrix and the cell type identity for each cell included, per input file (eg. "data/RCA_out/full_matrix/HA_min200genesPerCell_sorted_ENTREZ_expression_matrix.knn-smooth_k14_und-rm_withCellTypes.rds'")
 
 Note that the scripts are developed based on project specific questions. 
 To adapt them towards your own data and questions, some modifications may 
@@ -287,9 +286,9 @@ and from the [Differnetial expression analysis](#differnetial-expression-analysi
 and "data/DEGS_with_Monocle/Monocle_out_withFCs", respectively. Example data to run the codes can be found in "example_data/IPA_UR-prediction" 
 (output from IPA) and in "example_data/DEGs" (lists of DEGs).
 
-The output consists of multiple files from MNM construction, one for each time point, named "0h_UR_interactions.csv" 
+The output consists of multiple files from MNM construction, one for each time point, (eg. "/data/Multicellular_Network_Models/0h_UR_interactions.csv") 
 (see example [Table 3](#mnm-construction))
-and one file containing rank-ordered URs "UR_ranking.csv" (example [Table 4](#ranking-of-urs)).
+and one file containing rank-ordered URs ("daat/UR-rank/UR_ranking.csv") (example [Table 4](#ranking-of-urs)).
 
 ``` eval
 dir.create("data/Multicellular_Network_Models")
