@@ -1,10 +1,6 @@
 README
 ================
 
-Note that the scripts are developed based on project specific questions. 
-To adapt them towards your own data and questions, some modifications may 
-be needed, in which case we recommend RStudio.
-
 # scRNA-seq analysis for construction of multicellular network models (MNM) and prioritization of upstream regulatory (UR) genes
 
 # Instructions for running the codes
@@ -35,6 +31,17 @@ assesment and full matrix
 construction](#quality-assesment-and-full-matrix-construction), [Cell
 type analysis](#cell-type-analysis) and [Differnetial expression
 analysis](#differnetial-expression-analysis)
+
+The main output from this script are lists of DEGs (one list for each cell type, 
+time point, (and potentially disease state, HA or HC), and each comparision 
+("HA vs HC" and "allergenChallenged vs nonChallenged")) from the 
+[Differnetial expression analysis](#differnetial-expression-analysis) (Example [Table 1](#differnetial-expression-analysis)). 
+
+Additional output file from intermediate steps include; ... 
+
+Note that the scripts are developed based on project specific questions. 
+To adapt them towards your own data and questions, some modifications may 
+be needed, in which case we recommend RStudio.
 
 ``` eval
 dir.create("data")
@@ -190,6 +197,10 @@ points.*
 (A) and diluent-stimulated (D), as well as unstimulated control (C),
 samples from healthy individuals at the different time points.*
 
+***Table 1.** Example output file from sc_FC_zero-infl-neg-bionmial.R*
+
+![image](https://user-images.githubusercontent.com/51739216/156749464-69103745-4151-4ea4-93c8-227fa7603d48.png)
+
 ## Upstream Regulatory (UR) gene prediction in Ingenuity Pathway Analysis (IPA)
 
 IPA is a commercial software, but you can request a free trial here
@@ -256,7 +267,7 @@ The time point must be part of the sub-directory naming.
 Save all the output files from IPA (step 8 above) into their respective sub-directories. 
 Name the files according to the following structure: "celltype_timepoint_otherInfo.xls", eg. "Bcells_0h_HA_vs_HC.xls".
 
-***Table 1.** Example output from IPA UR prediction.*
+***Table 2.** Example output from IPA UR prediction.*
 
 ![image](https://user-images.githubusercontent.com/51739216/156583602-760e6e9c-5f34-4d0c-b12d-f6dd9a901a7f.png)
 
@@ -267,13 +278,13 @@ creates the output directory structure and calls the functions to run [MNM const
 [Ranking of URs](#ranking-of-urs). 
 
 Input to this code are the output files from [Ingenuity Pathway analysis](#upstream-regulatory-ur-gene-prediction-in-ingenuity-pathway-analysis-IPA) 
-and the output files from the [Differnetial expression analysis](#differnetial-expression-analysis). The files can be found in "data/IPA_UR-prediction"
-and in "data/DEGS_with_Monocle/Monocle_out_withFCs", respectively. Example data to run the codes can be found in "example_data/IPA_UR-prediction" 
-(example data from IPA) and in "example_data/DEGs" (example lists of DEGs).
+and from the [Differnetial expression analysis](#differnetial-expression-analysis). The files can be found in "data/IPA_UR-prediction"
+and "data/DEGS_with_Monocle/Monocle_out_withFCs", respectively. Example data to run the codes can be found in "example_data/IPA_UR-prediction" 
+(output from IPA) and in "example_data/DEGs" (lists of DEGs).
 
-The output consists of multiple files from MNM construction, one for each time point, named as "0h_UR_interactions.csv" 
-(see example [Table 2](#mnm-construction))
-and one file containing rank-ordered URs "UR_ranking.csv" (example [Table 3](#ranking-of-urs)).
+The output consists of multiple files from MNM construction, one for each time point, named "0h_UR_interactions.csv" 
+(see example [Table 3](#mnm-construction))
+and one file containing rank-ordered URs "UR_ranking.csv" (example [Table 4](#ranking-of-urs)).
 
 ``` eval
 dir.create("data/Multicellular_Network_Models")
@@ -317,7 +328,7 @@ Output: One .csv file per time point containing combined data from the
 IPA UR-predictions and DEG analysis for each interacting 
 'source cell type'-UR-'target cell type' combination.  
 
-***Table 2.** Example output from MNM_construction.R*
+***Table 3.** Example output from MNM_construction.R*
 
 ![image](https://user-images.githubusercontent.com/51739216/156578941-7ba75872-b477-4ecd-9a04-577f31f320d3.png)
 
@@ -334,7 +345,7 @@ Output: One .csv file containing a rank-ordered list of UR genes
 and the number of cell types and time point in which it was a predicted
 regulator.  
 
-***Table 3.** Example output from UR_ranking.R. The top listed URs are predicted 
+***Table 4.** Example output from UR_ranking.R. The top listed URs are predicted 
 in the highest number of cell types and time points, and are potentially 
 more important for disease compared to the low-ranked URs (at the bottom 
 of the file).*  
