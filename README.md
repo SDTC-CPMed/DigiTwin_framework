@@ -33,11 +33,14 @@ type analysis](#cell-type-analysis) and [Differnetial expression
 analysis](#differnetial-expression-analysis)
 
 The main output from this script are lists of DEGs (one list for each cell type, 
-time point, (and potentially disease state, HA or HC), and each comparision 
+time point, and each comparision 
 ("HA vs HC" and "allergenChallenged vs nonChallenged")) from the 
 [Differnetial expression analysis](#differnetial-expression-analysis) (Example [Table 1](#differnetial-expression-analysis)). 
+These output files can be found in "data/DEGS_with_Monocle/Monocle_out_withFCs".
 
-Additional output file from intermediate steps include; ... 
+Additional output file from intermediate steps include; one quality sorted matrix per input file (eg. "data/HA_min200genesPerCell_sorted_expression_matrix.csv"),
+one knn-smoothed matrix per input file (eg. "data/HA_min200genesPerCell_sorted_expression_matrix.knn-smooth_k14.csv"),
+one matrix with cell type identities per input file (eg. "")
 
 Note that the scripts are developed based on project specific questions. 
 To adapt them towards your own data and questions, some modifications may 
