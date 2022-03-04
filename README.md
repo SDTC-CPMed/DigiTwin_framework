@@ -32,10 +32,12 @@ construction](#quality-assesment-and-full-matrix-construction), [Cell
 type analysis](#cell-type-analysis) and [Differnetial expression
 analysis](#differnetial-expression-analysis)
 
-The main output from this script are lists of DEGs (one list for each cell type, 
+The main output from this script are lists of significant DEGs (q-val < 0.05) (one list for each cell type, 
 and time point), comparing "HA vs HC" (compares allergen challenged samples between allergic patients and healthy controls) from the 
 [Differnetial expression analysis](#differnetial-expression-analysis) (Example [Table 1](#differnetial-expression-analysis)). 
-These output files can be found in "data/DEGS_with_Monocle/Monocle_out_withFCs".
+These output files can be found in "data/DEGS_with_Monocle/Monocle_out_withFCs". 
+Additionally, the lists of DEGs before q-val sorting are saved to "data/DEGS_with_Monocle", 
+in case they will be needed for alternative analyses (not included in these scripts). 
 
 Additional output file from intermediate steps include; 
 * One quality sorted matrix per input file (eg. "data/HA_min200genesPerCell_sorted_expression_matrix.csv"),
