@@ -33,16 +33,15 @@ type analysis](#cell-type-analysis) and [Differnetial expression
 analysis](#differnetial-expression-analysis)
 
 The main output from this script are lists of significant DEGs (q-val < 0.05) (one list for each cell type, 
-and time point), comparing "HA vs HC" (compares allergen challenged samples between allergic patients and healthy controls) from the 
+and time point) with fold changes (FCs), comparing "HA vs HC" (compares allergen challenged samples between allergic patients and healthy controls) from the 
 [Differnetial expression analysis](#differnetial-expression-analysis) (Example [Table 1](#differnetial-expression-analysis)). 
-These output files can be found in "data/DEGS_with_Monocle/Monocle_out_withFCs". 
-Additionally, the lists of DEGs before q-val sorting are saved to "data/DEGS_with_Monocle", 
-in case they will be needed for alternative analyses (not included in these scripts). 
+These output files can be found in "data/DEGS_with_Monocle/Monocle_out_withFCs".  
 
 Additional output file from intermediate steps include; 
 * One quality sorted matrix per input file (eg. "data/HA_min200genesPerCell_sorted_expression_matrix.csv"),
 * One knn-smoothed matrix per input file (eg. "data/knn_smoothing/HA_min200genesPerCell_sorted_expression_matrix.knn-smooth_k14.csv"),
 * One Rdataframe (.rds) file, containing the knn-smoothed matrix and the cell type identity for each cell included, per input file (eg. "data/RCA_out/full_matrix/HA_min200genesPerCell_sorted_ENTREZ_expression_matrix.knn-smooth_k14_und-rm_withCellTypes.rds'")
+* The lists of DEGs before q-val sorting and FC calculation. To be found in "data/DEGS_with_Monocle/Monocle_out".
 
 Note that the scripts are developed based on project specific questions. 
 To adapt them towards your own data and questions, some modifications may 
