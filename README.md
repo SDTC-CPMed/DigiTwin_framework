@@ -1,5 +1,6 @@
 README
 ================
+![image](https://user-images.githubusercontent.com/51739216/163201212-cf47122a-c4b7-4255-9990-97c666e9239d.png)
 
 # scRNA-seq analysis for construction of multicellular network models (MNM) and prioritization of upstream regulatory (UR) genes
 
